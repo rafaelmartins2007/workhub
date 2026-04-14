@@ -2,26 +2,24 @@
 const express = require('express');
 const router = express.Router();
 
-// Importar as rotas (ainda não criámos, por isso ficam comentadas por agora)
- // const authRoutes = require('./auth');
-// const userRoutes = require('./userRoutes');
-// const spaceRoutes = require('./spaceRoutes');
-// const reservationRoutes = require('./reservationRoutes');
-// const extraServiceRoutes = require('./extraServiceRoutes');
+const authController = require('./auth');
+const verifyToken = require('./middleware/authMiddleware');
+const spaceRoutes = require('./spaceRoutes');     // ← NOVA LINHA
 
-// Rotas que vamos adicionar mais tarde
-// router.use('/auth', authRoutes);
-// router.use('/users', userRoutes);
-// router.use('/spaces', spaceRoutes);
-// router.use('/reservations', reservationRoutes);
-// router.use('/extra-services', extraServiceRoutes);
+// ====================== ROTAS PÚBLICAS ======================
+router.post('/auth/register', authController.register);
+router.post('/auth/login',    authController.login);
 
-// Rota de teste (para confirmar que o servidor está a funcionar)
+// ====================== ROTAS DOS ESPAÇOS ======================
+router.use('/spaces', spaceRoutes);
+
+// ====================== OUTRAS ROTAS PROTEGIDAS ======================
+router.get('/profile', verifyToken, (req, res) => {
+    res.json({ message: "Perfil carregado", user: req.user });
+});
+
 router.get('/', (req, res) => {
-    res.json({ 
-        message: 'API WorkHub Spaces a funcionar!',
-        version: '1.0.0'
-    });
+    res.json({ message: '✅ API WorkHub Spaces a funcionar!' });
 });
 
 module.exports = router;

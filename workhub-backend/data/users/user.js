@@ -1,20 +1,5 @@
 // data/users/user.js
 let mongoose = require("mongoose");
-let scopes = require("./scopes");
-
-let RoleSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    scopes: [{
-        type: String,
-        enum: [
-            scopes['read-all'],
-            scopes['manage-spaces'],
-            scopes['manage-reservations'],
-            scopes['manage-users'],
-            scopes['manage-services']
-        ]
-    }]
-});
 
 let UserSchema = new mongoose.Schema({
     nome:      { type: String, required: true },
@@ -25,8 +10,14 @@ let UserSchema = new mongoose.Schema({
     atividade: { type: String },
     empresa:   { type: String },
     password:  { type: String, required: true },
-    role:      { type: RoleSchema }
-});
+    
+    // ✅ Alterado para string simples (mais fácil e suficiente)
+    role: { 
+        type: String, 
+        enum: ["client", "admin"], 
+        default: "client" 
+    }
+}, { timestamps: true });
 
 let User = mongoose.model("User", UserSchema);
 
