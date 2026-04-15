@@ -1,0 +1,26 @@
+[{
+  "_id": {
+    "$oid": "69dfe36ee5b4068712bbabec"
+  },
+  "user": {
+    "$oid": "69deb879dbf9b94375063acd"
+  },
+  "space": {
+    "$oid": "69debb77dbf9b94375063ad4"
+  },
+  "data": {
+    "$date": "2026-04-25T00:00:00.000Z"
+  },
+  "horaInicio": "10:00",
+  "duracao": 4,
+  "estado": "Pendente",
+  "observacoes": "Quero secretária junto à janela",
+  "servicosExtras": [],
+  "createdAt": {
+    "$date": "2026-04-15T19:13:50.328Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T19:13:50.328Z"
+  },
+  "__v": 0
+}]

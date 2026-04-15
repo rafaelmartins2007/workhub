@@ -8,142 +8,313 @@
   },
   "item": [
     {
-      "name": "Login - client",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"email\":\"joao@teste.com\",\r\n  \"password\":\"joao123\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+      "name": "Users",
+      "item": [
+        {
+          "name": "Login - admin",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\":\"tiago@workhub.pt\",\r\n  \"password\":\"tiago123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
             }
-          }
+          },
+          "response": []
         },
-        "url": {
-          "raw": "http://127.0.0.1:3000/api/auth/login",
-          "protocol": "http",
-          "host": [
-            "127",
-            "0",
-            "0",
-            "1"
-          ],
-          "port": "3000",
-          "path": [
-            "api",
-            "auth",
-            "login"
-          ]
+        {
+          "name": "Login - client",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\":\"joao@teste.com\",\r\n  \"password\":\"joao123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Registo",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nome\": \"\",\r\n  \"email\": \"\",\r\n  \"contacto\": \"\",\r\n  \"morada\": \"\",\r\n  \"nif\": \"\",\r\n  \"atividade\": \"\",\r\n  \"empresa\": \"\",\r\n  \"password\": \"\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/auth/register",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
         }
-      },
-      "response": []
+      ]
     },
     {
-      "name": "Login - admin",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"email\":\"tiago@workhub.pt\",\r\n  \"password\":\"tiago123\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+      "name": "Token",
+      "item": [
+        {
+          "name": "Testar token",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGViODc5ZGJmOWI5NDM3NTA2M2FjZCIsImVtYWlsIjoiam9hb0B0ZXN0ZS5jb20iLCJyb2xlIjoiY2xpZW50IiwiaWF0IjoxNzc2Mjc3NDU2LCJleHAiOjE3NzYzNjM4NTZ9.JgyAPYAF8AX3BxQ8TjWD16WGN9ZrkhhHRL3iBOETMYA",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\":\"tiago@workhub.pt\",\r\n  \"password\":\"tiago123\"\r\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/profile",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "profile"
+              ]
             }
-          }
-        },
-        "url": {
-          "raw": "http://127.0.0.1:3000/api/auth/login",
-          "protocol": "http",
-          "host": [
-            "127",
-            "0",
-            "0",
-            "1"
-          ],
-          "port": "3000",
-          "path": [
-            "api",
-            "auth",
-            "login"
-          ]
+          },
+          "response": []
         }
-      },
-      "response": []
+      ]
     },
     {
-      "name": "Registo",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"nome\": \"\",\r\n  \"email\": \"\",\r\n  \"contacto\": \"\",\r\n  \"morada\": \"\",\r\n  \"nif\": \"\",\r\n  \"atividade\": \"\",\r\n  \"empresa\": \"\",\r\n  \"password\": \"\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+      "name": "Spaces",
+      "item": [
+        {
+          "name": "Criar spaces",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGViNzhkZGJmOWI5NDM3NTA2M2FjOSIsImVtYWlsIjoidGlhZ29Ad29ya2h1Yi5wdCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3NjI3OTIxMywiZXhwIjoxNzc2MzY1NjEzfQ.cntVLuRD7pUsgrLxwjI2tRetzw_hsxq-rKzT7u8a9Zw",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"tipo\": \"sala_reuniao\",\r\n  \"descricao\": \"Sala de reuniões para até 8 pessoas com TV 65\\\" e videoconferência.\",\r\n  \"capacidade\": 8,\r\n  \"equipamentos\": [\"TV 65\\\"\", \"Webcam 4K\", \"Microfone\", \"Quadro branco\", \"Wi-Fi\", \"Ar condicionado\"],\r\n  \"precoHora\": 25,\r\n  \"precoDia\": 180,\r\n  \"imagens\": [],\r\n  \"ativo\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/spaces",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "spaces"
+              ]
             }
-          }
+          },
+          "response": []
         },
-        "url": {
-          "raw": "http://127.0.0.1:3000/api/auth/register",
-          "protocol": "http",
-          "host": [
-            "127",
-            "0",
-            "0",
-            "1"
-          ],
-          "port": "3000",
-          "path": [
-            "api",
-            "auth",
-            "register"
-          ]
+        {
+          "name": "Ver spaces",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGViNzhkZGJmOWI5NDM3NTA2M2FjOSIsImVtYWlsIjoidGlhZ29Ad29ya2h1Yi5wdCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3NjI3OTIxMywiZXhwIjoxNzc2MzY1NjEzfQ.cntVLuRD7pUsgrLxwjI2tRetzw_hsxq-rKzT7u8a9Zw",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/spaces",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "spaces"
+              ]
+            }
+          },
+          "response": []
         }
-      },
-      "response": []
+      ]
     },
     {
-      "name": "Testar token",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "auth": {
-          "type": "bearer"
+      "name": "Reservas",
+      "item": [
+        {
+          "name": "Criar reserva",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGViODc5ZGJmOWI5NDM3NTA2M2FjZCIsImVtYWlsIjoiam9hb0B0ZXN0ZS5jb20iLCJyb2xlIjoiY2xpZW50IiwiaWF0IjoxNzc2MjgwMzEzLCJleHAiOjE3NzYzNjY3MTN9.uA1612e0DbL7B33Ej-D_L-yi0mpRxAuXHbao-9bP04E",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"space\": \"69debb77dbf9b94375063ad4\",\r\n  \"data\": \"2026-04-25\",\r\n  \"horaInicio\": \"10:00\",\r\n  \"duracao\": 4,\r\n  \"observacoes\": \"Quero secretária junto à janela\",\r\n  \"servicosExtras\": []\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/reservations",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "reservations"
+              ]
+            }
+          },
+          "response": []
         },
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGViODc5ZGJmOWI5NDM3NTA2M2FjZCIsImVtYWlsIjoiam9hb0B0ZXN0ZS5jb20iLCJyb2xlIjoiY2xpZW50IiwiaWF0IjoxNzc2Mjc3NDU2LCJleHAiOjE3NzYzNjM4NTZ9.JgyAPYAF8AX3BxQ8TjWD16WGN9ZrkhhHRL3iBOETMYA",
-            "type": "text"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"email\":\"tiago@workhub.pt\",\r\n  \"password\":\"tiago123\"\r\n}"
-        },
-        "url": {
-          "raw": "http://127.0.0.1:3000/api/profile",
-          "protocol": "http",
-          "host": [
-            "127",
-            "0",
-            "0",
-            "1"
-          ],
-          "port": "3000",
-          "path": [
-            "api",
-            "profile"
-          ]
+        {
+          "name": "Ver reservas",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
         }
-      },
-      "response": []
+      ]
+    },
+    {
+      "name": "Servicos Extras",
+      "item": [
+        {
+          "name": "Criar servico",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nome\": \"Coffee Break\",\r\n  \"descricao\": \"Café, chá, sumo e bolos para até 8 pessoas\",\r\n  \"preco\": 35,\r\n  \"disponivel\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/extra-services",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "extra-services"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,10 @@
+[{
+  "_id": {
+    "$oid": "69dfed8503e29adeaa9e7b01"
+  },
+  "nome": "Coffee Break",
+  "descricao": "Café, chá, sumo e bolos para até 8 pessoas",
+  "preco": 35,
+  "disponivel": true,
+  "__v": 0
+}]
