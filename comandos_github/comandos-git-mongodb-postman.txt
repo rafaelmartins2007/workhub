@@ -1,0 +1,63 @@
+=================================================================
+COMANDOS ÚTEIS - Workhub Project (Git + MongoDB + Postman)
+=================================================================
+
+1. CLONAR o repositório pela primeira vez (quando ainda não tens nada)
+git clone https://github.com/rafaelmartins2007/workhub.git
+
+Depois entra na pasta:
+cd workhub
+
+
+2. ATUALIZAR o projeto (quando já tens o repositório e queres as últimas alterações)
+git pull origin main
+
+
+3. VER o estado do projeto (quais ficheiros estão modificados)
+git status
+
+
+4. ADICIONAR todas as alterações novas
+git add .
+
+
+5. FAZER COMMIT (guardar as alterações)
+git commit -m "Descreve aqui o que mudaste - ex: Adiciona novos dados no mongodb"
+
+
+6. ENVIAR as alterações para o GitHub
+git push origin main
+
+
+=================================================================
+MONGODB - Exportar e Importar dados (workhub)
+
+Exportar as collections (no terminal):
+mongodump --db=workhub --out=./mongodb
+
+Importar os dados (no terminal):
+mongorestore --db=workhub ./mongodb/workhub
+
+
+=================================================================
+POSTMAN - Exportar e Importar Collection
+
+→ No Postman: 
+   Clique direito na collection "Workhub" → Export → Collection v2.1
+   Guarda como: postman/Workhub.postman_collection.json
+
+
+=================================================================
+COMANDOS RÁPIDOS PARA O PROJETO
+
+# Entrar na pasta do projeto
+cd C:\Users\rafam\OneDrive\Ambiente de Trabalho\DWDM\PW\CTESP_curso_PW_8250565_8250566
+
+# Ver branches
+git branch
+
+# Mudar para branch main (caso não esteja)
+git checkout main
+
+# Configurar autocrlf (para evitar warnings de LF/CRLF)
+git config --global core.autocrlf true
