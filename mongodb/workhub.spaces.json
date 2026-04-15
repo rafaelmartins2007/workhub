@@ -1,0 +1,18 @@
+[{
+  "_id": {
+    "$oid": "69debb77dbf9b94375063ad4"
+  },
+  "tipo": "secretaria_partilhada",
+  "descricao": "Secretária ergonómica com cadeira confortável e luz natural.",
+  "capacidade": 1,
+  "equipamentos": [
+    "Mesa ergonómica",
+    "Cadeira ajustável",
+    "Wi-Fi 6"
+  ],
+  "precoHora": 8,
+  "precoDia": 45,
+  "imagens": [],
+  "ativo": true,
+  "__v": 0
+}]

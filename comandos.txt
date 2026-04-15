@@ -1,0 +1,17 @@
+admins:
+Nome: Tiago Pinto
+email: tiago@workhub.pt
+Password: tiago123
+
+
+client:
+Nome: João Silva
+email: joao@teste.com
+Password: joao123
+
+
+Rotas:
+Login - http://127.0.0.1:3000/api/auth/login
+Registro - http://127.0.0.1:3000/api/auth/register
+Spaces - http://127.0.0.1:3000/api/spaces
+Profile - http://127.0.0.1:3000/api/profile

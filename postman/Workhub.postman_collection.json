@@ -1,0 +1,149 @@
+{
+  "info": {
+    "_postman_id": "4ac42c26-ea5d-4faf-8f1a-b26314f0240b",
+    "name": "Workhub",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52226576",
+    "_collection_link": "https://go.postman.co/collection/52226576-4ac42c26-ea5d-4faf-8f1a-b26314f0240b?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Login - client",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\":\"joao@teste.com\",\r\n  \"password\":\"joao123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:3000/api/auth/login",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login - admin",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\":\"tiago@workhub.pt\",\r\n  \"password\":\"tiago123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:3000/api/auth/login",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Registo",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nome\": \"\",\r\n  \"email\": \"\",\r\n  \"contacto\": \"\",\r\n  \"morada\": \"\",\r\n  \"nif\": \"\",\r\n  \"atividade\": \"\",\r\n  \"empresa\": \"\",\r\n  \"password\": \"\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:3000/api/auth/register",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "auth",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Testar token",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGViODc5ZGJmOWI5NDM3NTA2M2FjZCIsImVtYWlsIjoiam9hb0B0ZXN0ZS5jb20iLCJyb2xlIjoiY2xpZW50IiwiaWF0IjoxNzc2Mjc3NDU2LCJleHAiOjE3NzYzNjM4NTZ9.JgyAPYAF8AX3BxQ8TjWD16WGN9ZrkhhHRL3iBOETMYA",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\":\"tiago@workhub.pt\",\r\n  \"password\":\"tiago123\"\r\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:3000/api/profile",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "profile"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

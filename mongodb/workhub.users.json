@@ -1,0 +1,40 @@
+[{
+  "_id": {
+    "$oid": "69deb78ddbf9b94375063ac9"
+  },
+  "nome": "Tiago Pinto",
+  "email": "tiago@workhub.pt",
+  "contacto": "910000000",
+  "morada": "Rua do Coworking, 123 - Porto",
+  "nif": "987654321",
+  "atividade": "Gestor de Espaços Coworking",
+  "empresa": "WorkHub Spaces",
+  "password": "$2b$10$ADeuVnphHnwzEfyWhkJQxuu16gSJxwZIRohBComjQIalP/5aUbhby",
+  "role": "admin",
+  "createdAt": {
+    "$date": "2026-04-14T21:54:21.455Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-14T21:54:21.455Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69deb879dbf9b94375063acd"
+  },
+  "nome": "João Silva",
+  "email": "joao@teste.com",
+  "contacto": "912345678",
+  "morada": "Rua Exemplo 123, Porto",
+  "nif": "123456789",
+  "password": "$2b$10$1Gz.V7DoaQ1qejvYU.ZnSeXerZ.cG2G0r.V9SkkpDK9Hq9l0bJF22",
+  "role": "client",
+  "createdAt": {
+    "$date": "2026-04-14T21:58:17.532Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-14T21:58:17.532Z"
+  },
+  "__v": 0
+}]
