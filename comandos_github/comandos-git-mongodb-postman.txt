@@ -22,7 +22,7 @@ git add .
 
 
 5. FAZER COMMIT (guardar as alterações)
-git commit -m "Descreve aqui o que mudaste - ex: Adiciona novos dados no mongodb"
+git commit -m ""
 
 
 6. ENVIAR as alterações para o GitHub

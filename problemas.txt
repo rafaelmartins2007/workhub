@@ -1,0 +1,5 @@
+No ver spaces dá para ver sem ter nenhum token.
+
+Não devia criar 2 espaços iguais.
+
+O cliente pode cancelar a reserva?
