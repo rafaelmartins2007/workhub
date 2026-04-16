@@ -3,8 +3,58 @@
     "$oid": "69dfed8503e29adeaa9e7b01"
   },
   "nome": "Coffee Break",
+  "descricao": "Ola",
+  "preco": 35,
+  "disponivel": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e00977f6b3a0d007c55c6e"
+  },
+  "nome": "Coffee Break",
   "descricao": "Café, chá, sumo e bolos para até 8 pessoas",
   "preco": 35,
+  "disponivel": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e00981f6b3a0d007c55c70"
+  },
+  "nome": "Impressão A4",
+  "descricao": "Impressão a preto e branco (por página)",
+  "preco": 0.15,
+  "disponivel": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e0098af6b3a0d007c55c72"
+  },
+  "nome": "Equipamento AV",
+  "descricao": "Projetor + ecrã + sistema de som",
+  "preco": 45,
+  "disponivel": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e00994f6b3a0d007c55c74"
+  },
+  "nome": "Cacifo Temporário",
+  "descricao": "Cacifo grande por 1 dia",
+  "preco": 8,
+  "disponivel": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e0099df6b3a0d007c55c76"
+  },
+  "nome": "Coffee Break Premium",
+  "descricao": "Coffee break com sandwiches e fruta",
+  "preco": 55,
   "disponivel": true,
   "__v": 0
 }]

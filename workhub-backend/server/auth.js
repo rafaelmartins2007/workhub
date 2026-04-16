@@ -48,44 +48,38 @@ function AuthController() {
 
     
     async function login(req, res) {
-        try {
-            const { email, password } = req.body;
+    try {
+        const { email, password } = req.body;
 
-            const user = await User.findOne({ email });
-            if (!user) {
-                return res.status(401).json({ message: "Email ou password incorretos" });
-            }
-
-            const isPasswordValid = await userService.comparePassword(password, user.password);
-            if (!isPasswordValid) {
-                return res.status(401).json({ message: "Email ou password incorretos" });
-            }
-
-            
-            const token = jwt.sign(
-                { 
-                    id: user._id, 
-                    email: user.email, 
-                    role: user.role 
-                },
-                config.secret,
-                { expiresIn: config.expiresPassword }
-            );
-
-            res.json({
-                message: "Login efetuado com sucesso",
-                token,
-                user: {
-                    id: user._id,
-                    nome: user.nome,
-                    email: user.email,
-                    role: user.role
-                }
-            });
-        } catch (error) {
-            res.status(500).json({ message: "Erro no login", error: error.message });
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(401).json({ message: "Email ou password incorretos" });
         }
+
+        if (!user.ativo) {
+            return res.status(403).json({ message: "Conta suspensa. Contacte o administrador." });
+        }
+
+        const isPasswordValid = await userService.comparePassword(password, user.password);
+        if (!isPasswordValid) {
+            return res.status(401).json({ message: "Email ou password incorretos" });
+        }
+
+        const token = jwt.sign(
+            { id: user._id, email: user.email, role: user.role, ativo: user.ativo },
+            config.secret,
+            { expiresIn: config.expiresPassword }
+        );
+
+        res.json({
+            message: "Login efetuado com sucesso",
+            token,
+            user: { id: user._id, nome: user.nome, email: user.email, role: user.role }
+        });
+    } catch (error) {
+        res.status(500).json({ message: "Erro no login", error: error.message });
     }
+}
 
     return { register, login };
 }

@@ -12,23 +12,32 @@ const verifyToken = require('./middleware/authMiddleware');
 // ====================== ROTAS DO CLIENTE ======================
 router.post('/', verifyToken, async (req, res) => {
     try {
+        // ✅ Nova verificação: conta deve estar ativa
+        if (!req.user.ativo) {
+            return res.status(403).json({ 
+                message: "Conta suspensa. Não é possível fazer reservas." 
+            });
+        }
+
         const reservationData = {
             ...req.body,
-            user: req.user.id   // associa automaticamente ao utilizador logado
+            user: req.user.id
         };
+
         const newReservation = await reservationService.create(reservationData);
         res.status(201).json(newReservation);
     } catch (error) {
-        res.status(500).json({ message: "Erro ao criar reserva", error: error.message });
+        res.status(500).json({ 
+            message: "Erro ao criar reserva", 
+            error: error.message 
+        });
     }
 });
 
 router.get('/my', verifyToken, async (req, res) => {
     try {
-        const reservations = await Reservation.find({ user: req.user.id })
-            .populate('space')
-            .populate('servicosExtras');
-        res.json(reservations);
+        const result = await reservationService.findMyReservations(req);
+        res.json(result);
     } catch (error) {
         res.status(500).json({ message: "Erro ao listar minhas reservas", error: error.message });
     }
@@ -44,10 +53,8 @@ const isAdmin = (req, res, next) => {
 
 router.get('/', verifyToken, isAdmin, async (req, res) => {
     try {
-        const reservations = await Reservation.find({})
-            .populate('user')
-            .populate('space');
-        res.json(reservations);
+        const result = await reservationService.findAll(req);
+        res.json(result);
     } catch (error) {
         res.status(500).json({ message: "Erro ao listar todas as reservas", error: error.message });
     }

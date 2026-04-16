@@ -10,13 +10,8 @@ let UserSchema = new mongoose.Schema({
     atividade: { type: String },
     empresa:   { type: String },
     password:  { type: String, required: true },
-    
-    // ✅ Alterado para string simples (mais fácil e suficiente)
-    role: { 
-        type: String, 
-        enum: ["client", "admin"], 
-        default: "client" 
-    }
+    role:      { type: String, enum: ["client", "admin"], default: "client" },
+    ativo:     { type: Boolean, default: true }
 }, { timestamps: true });
 
 let User = mongoose.model("User", UserSchema);

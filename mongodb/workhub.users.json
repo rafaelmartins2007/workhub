@@ -34,7 +34,218 @@
     "$date": "2026-04-14T21:58:17.532Z"
   },
   "updatedAt": {
-    "$date": "2026-04-14T21:58:17.532Z"
+    "$date": "2026-04-16T20:00:39.097Z"
+  },
+  "__v": 0,
+  "ativo": true
+},
+{
+  "_id": {
+    "$oid": "69e00885f6b3a0d007c55c3e"
+  },
+  "nome": "Ana Costa",
+  "email": "ana.costa@gmail.com",
+  "contacto": "910111222",
+  "morada": "Rua das Flores 45, Porto",
+  "nif": "123456780",
+  "atividade": "Desenvolvedora",
+  "empresa": "Freelance",
+  "password": "$2b$10$TL3GWl1DaHSIzXr1ePIqAuy5bCNZTgvjlL8cR95tBBMNRBY1vq9zG",
+  "role": "client",
+  "createdAt": {
+    "$date": "2026-04-15T21:52:05.205Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T21:52:05.205Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e0089df6b3a0d007c55c42"
+  },
+  "nome": "Pedro Mendes",
+  "email": "pedro.mendes@outlook.com",
+  "contacto": "920222333",
+  "morada": "Avenida da Boavista 120, Porto",
+  "nif": "234567891",
+  "atividade": "Marketing",
+  "empresa": "StartupX",
+  "password": "$2b$10$W9RbjmAa5KBKtKTQY3W9UuqBkbz3VEX2CT81i7yhCzYAuPcB8fZ46",
+  "role": "client",
+  "createdAt": {
+    "$date": "2026-04-15T21:52:29.315Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T21:52:29.315Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e008adf6b3a0d007c55c46"
+  },
+  "nome": "Sofia Ribeiro",
+  "email": "sofia.ribeiro@gmail.com",
+  "contacto": "930333444",
+  "morada": "Praça da Liberdade 10, Lisboa",
+  "nif": "345678902",
+  "atividade": "Advogada",
+  "empresa": "",
+  "password": "$2b$10$v0EOB7LDliDMIMnhEt/Kme59pyHI9SAurv88nIRjHZelrTSOaOJoG",
+  "role": "client",
+  "createdAt": {
+    "$date": "2026-04-15T21:52:45.517Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T21:52:45.517Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e008b7f6b3a0d007c55c4a"
+  },
+  "nome": "Miguel Santos",
+  "email": "miguel.santos@empresa.pt",
+  "contacto": "940444555",
+  "morada": "Rua do Comércio 88, Porto",
+  "nif": "456789013",
+  "atividade": "Consultor",
+  "empresa": "ConsultingPro",
+  "password": "$2b$10$G5rrRyjFwY..rmqivxVLY.A7a7QaEfsu7eUjw/JzgIKHDL98lP9fy",
+  "role": "client",
+  "createdAt": {
+    "$date": "2026-04-15T21:52:55.751Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T21:52:55.751Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e008c4f6b3a0d007c55c4e"
+  },
+  "nome": "Laura Ferreira",
+  "email": "laura.ferreira@gmail.com",
+  "contacto": "950555666",
+  "morada": "Travessa das Oliveiras 22, Braga",
+  "nif": "567890124",
+  "atividade": "Fotógrafa",
+  "empresa": "Freelance",
+  "password": "$2b$10$0PPJaxnZKy7U10ZZIzyWZOWbtnBJH6XcDb4TARy/RpTOasvUOj2rS",
+  "role": "client",
+  "createdAt": {
+    "$date": "2026-04-15T21:53:08.783Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T21:53:08.783Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e008d2f6b3a0d007c55c52"
+  },
+  "nome": "Carlos Almeida",
+  "email": "carlos.almeida@workhub.pt",
+  "contacto": "960666777",
+  "morada": "Rua do Coworking 123, Porto",
+  "nif": "678901235",
+  "atividade": "Gestor",
+  "empresa": "WorkHub Spaces",
+  "password": "$2b$10$rZEc/atM4NQfjU72b8SdiutvA3wVtpgMG/H.uYV7Iw.16bWRAvErK",
+  "role": "admin",
+  "createdAt": {
+    "$date": "2026-04-15T21:53:22.565Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T21:53:22.565Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e008def6b3a0d007c55c56"
+  },
+  "nome": "Beatriz Lima",
+  "email": "beatriz.lima@workhub.pt",
+  "contacto": "970777888",
+  "morada": "Rua do Coworking 123, Porto",
+  "nif": "789012346",
+  "atividade": "Gestora",
+  "empresa": "WorkHub Spaces",
+  "password": "$2b$10$aTFbCjOgw/yRn2AHP72vNez0S6BDw1xCL/qu/cMxcm9BYZ6E63URa",
+  "role": "admin",
+  "createdAt": {
+    "$date": "2026-04-15T21:53:34.756Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T21:53:34.756Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e00912f6b3a0d007c55c5a"
+  },
+  "nome": "Rui Oliveira",
+  "email": "rui.oliveira@workhub.pt",
+  "contacto": "980888999",
+  "morada": "Rua do Coworking 123, Porto",
+  "nif": "890123457",
+  "atividade": "Administrador",
+  "empresa": "WorkHub Spaces",
+  "password": "$2b$10$bnncGBKPEGdEDIKNFpeU5e84hdhcWyTYTD7N2kmyE9niNa/EAxRmi",
+  "role": "admin",
+  "createdAt": {
+    "$date": "2026-04-15T21:54:26.560Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T21:54:26.560Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e0091bf6b3a0d007c55c5e"
+  },
+  "nome": "Inês Martins",
+  "email": "ines.martins@workhub.pt",
+  "contacto": "991999000",
+  "morada": "Rua do Coworking 123, Porto",
+  "nif": "901234568",
+  "atividade": "Gestora de Eventos",
+  "empresa": "WorkHub Spaces",
+  "password": "$2b$10$TDRhfr2w1DRvZrGop3M.zOEC3UbZiCCyVLcy4M4VgIp93NOfJlcRG",
+  "role": "admin",
+  "createdAt": {
+    "$date": "2026-04-15T21:54:35.401Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T21:54:35.401Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e00923f6b3a0d007c55c62"
+  },
+  "nome": "João Pereira",
+  "email": "joao.pereira@workhub.pt",
+  "contacto": "912345678",
+  "morada": "Rua do Coworking 123, Porto",
+  "nif": "012345679",
+  "atividade": "Coordenador",
+  "empresa": "WorkHub Spaces",
+  "password": "$2b$10$x5xJZ2eoSjxCFSiPU.Isket.j9K4iLfpnJFtzO9xOirtEGVBPcIaG",
+  "role": "admin",
+  "createdAt": {
+    "$date": "2026-04-15T21:54:43.976Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T21:54:43.976Z"
   },
   "__v": 0
 }]

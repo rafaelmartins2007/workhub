@@ -1,0 +1,752 @@
+{
+  "info": {
+    "_postman_id": "215cdcc8-374e-40d4-b3a9-d1a1b1354d74",
+    "name": "Workhub Copy",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52226775",
+    "_collection_link": "https://go.postman.co/collection/52226775-215cdcc8-374e-40d4-b3a9-d1a1b1354d74?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Login - admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGViNzhkZGJmOWI5NDM3NTA2M2FjOSIsImVtYWlsIjoidGlhZ29Ad29ya2h1Yi5wdCIsInJvbGUiOiJhZG1pbiIsImF0aXZvIjp0cnVlLCJpYXQiOjE3NzYzNjc5MTcsImV4cCI6MTc3NjQ1NDMxN30.jjtMcSncKro3c-FEes3_GTrmej82pH-PS84UKN5oehI",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\":\"tiago@workhub.pt\",\r\n  \"password\":\"tiago123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login - client",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\":\"joao@teste.com\",\r\n  \"password\":\"joao123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/auth/login/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "login",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Registo",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nome\": \"\",\r\n  \"email\": \"\",\r\n  \"contacto\": \"\",\r\n  \"morada\": \"\",\r\n  \"nif\": \"\",\r\n  \"atividade\": \"\",\r\n  \"empresa\": \"\",\r\n  \"password\": \"\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/auth/register",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Ativar/Desativar conta",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGViNzhkZGJmOWI5NDM3NTA2M2FjOSIsImVtYWlsIjoidGlhZ29Ad29ya2h1Yi5wdCIsInJvbGUiOiJhZG1pbiIsImF0aXZvIjp0cnVlLCJpYXQiOjE3NzYzNjc5MTcsImV4cCI6MTc3NjQ1NDMxN30.jjtMcSncKro3c-FEes3_GTrmej82pH-PS84UKN5oehI",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/users/69deb879dbf9b94375063acd/toggle",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "users",
+                "69deb879dbf9b94375063acd",
+                "toggle"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Token",
+      "item": [
+        {
+          "name": "Testar token",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGViODc5ZGJmOWI5NDM3NTA2M2FjZCIsImVtYWlsIjoiam9hb0B0ZXN0ZS5jb20iLCJyb2xlIjoiY2xpZW50IiwiaWF0IjoxNzc2Mjc3NDU2LCJleHAiOjE3NzYzNjM4NTZ9.JgyAPYAF8AX3BxQ8TjWD16WGN9ZrkhhHRL3iBOETMYA",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\":\"tiago@workhub.pt\",\r\n  \"password\":\"tiago123\"\r\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/profile",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Spaces",
+      "item": [
+        {
+          "name": "Criar spaces",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGViNzhkZGJmOWI5NDM3NTA2M2FjOSIsImVtYWlsIjoidGlhZ29Ad29ya2h1Yi5wdCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3NjI3OTIxMywiZXhwIjoxNzc2MzY1NjEzfQ.cntVLuRD7pUsgrLxwjI2tRetzw_hsxq-rKzT7u8a9Zw",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"tipo\": \"sala_reuniao\",\r\n  \"descricao\": \"Sala de reuniões para até 8 pessoas com TV 65\\\" e videoconferência.\",\r\n  \"capacidade\": 8,\r\n  \"equipamentos\": [\"TV 65\\\"\", \"Webcam 4K\", \"Microfone\", \"Quadro branco\", \"Wi-Fi\", \"Ar condicionado\"],\r\n  \"precoHora\": 25,\r\n  \"precoDia\": 180,\r\n  \"imagens\": [],\r\n  \"ativo\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/spaces",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "spaces"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Ver spaces",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/spaces?page=1&limit=5",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "spaces"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search e paginacao",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/spaces?search=sala&page=1&limit=10",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "spaces"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "sala"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Pesquisar por espaco",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/spaces?capacidade=8",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "spaces"
+              ],
+              "query": [
+                {
+                  "key": "capacidade",
+                  "value": "8"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Editar space",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGViNzhkZGJmOWI5NDM3NTA2M2FjOSIsImVtYWlsIjoidGlhZ29Ad29ya2h1Yi5wdCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3NjM2MTE3OCwiZXhwIjoxNzc2MzYxMjM4fQ.ncRlxNYGhbqJj3TE4uGPXEHsIBbVoO6WK1bpmOhAVQ8",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"descricao\": \"Ole.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/spaces/69debb77dbf9b94375063ad4",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "spaces",
+                "69debb77dbf9b94375063ad4"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Reservas",
+      "item": [
+        {
+          "name": "Criar reserva",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGViODc5ZGJmOWI5NDM3NTA2M2FjZCIsImVtYWlsIjoiam9hb0B0ZXN0ZS5jb20iLCJyb2xlIjoiY2xpZW50IiwiYXRpdm8iOnRydWUsImlhdCI6MTc3NjM2NzkyOSwiZXhwIjoxNzc2NDU0MzI5fQ.2Vgz4TeQgJsz0a2FYX9p7AJOYz_i9xafr-w7Ek9fycA",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"space\": \"69debb77dbf9b94375063ad4\",\r\n  \"data\": \"2026-04-25\",\r\n  \"horaInicio\": \"10:00\",\r\n  \"duracao\": 4,\r\n  \"observacoes\": \"aaaaaaaaaaaaaaa\",\r\n  \"servicosExtras\": []\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/reservations",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "reservations"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Ver reservas",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGViNzhkZGJmOWI5NDM3NTA2M2FjOSIsImVtYWlsIjoidGlhZ29Ad29ya2h1Yi5wdCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3NjI4ODgxMiwiZXhwIjoxNzc2Mzc1MjEyfQ.dpDsvbkT6wik-r0CJZwNcYaZXFFjGJZhWCP_y8YvmZo",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/reservations?page=2&limit=10&status=Confirmada",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "reservations"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "2"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "status",
+                  "value": "Confirmada"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Editar reserva",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGViNzhkZGJmOWI5NDM3NTA2M2FjOSIsImVtYWlsIjoidGlhZ29Ad29ya2h1Yi5wdCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3NjI4ODgxMiwiZXhwIjoxNzc2Mzc1MjEyfQ.dpDsvbkT6wik-r0CJZwNcYaZXFFjGJZhWCP_y8YvmZo",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"estado\": \"Confirmada\",\r\n  \"observacoesInternas\":\"O cliente reclamou\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/reservations/69e009aff6b3a0d007c55c78",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "reservations",
+                "69e009aff6b3a0d007c55c78"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reservas pendentes utilizador",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGViODc5ZGJmOWI5NDM3NTA2M2FjZCIsImVtYWlsIjoiam9hb0B0ZXN0ZS5jb20iLCJyb2xlIjoiY2xpZW50IiwiYXRpdm8iOnRydWUsImlhdCI6MTc3NjM2NTA4OCwiZXhwIjoxNzc2NDUxNDg4fQ._mRUCIBpUHISmlAioTZSOzQnR7zIW3cbqCW-E12t574",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/reservations/my?page=1&limit=3&status=Pendente",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "reservations",
+                "my"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "3"
+                },
+                {
+                  "key": "status",
+                  "value": "Pendente"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reservas  por data",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGViNzhkZGJmOWI5NDM3NTA2M2FjOSIsImVtYWlsIjoidGlhZ29Ad29ya2h1Yi5wdCIsInJvbGUiOiJhZG1pbiIsImF0aXZvIjp0cnVlLCJpYXQiOjE3NzYzNjc5MTcsImV4cCI6MTc3NjQ1NDMxN30.jjtMcSncKro3c-FEes3_GTrmej82pH-PS84UKN5oehI",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/reservations?dataInicio=2026-05-02&dataFim=2026-05-05",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "reservations"
+              ],
+              "query": [
+                {
+                  "key": "dataInicio",
+                  "value": "2026-05-02"
+                },
+                {
+                  "key": "dataFim",
+                  "value": "2026-05-05"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Servicos Extras",
+      "item": [
+        {
+          "name": "Criar servico",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGViNzhkZGJmOWI5NDM3NTA2M2FjOSIsImVtYWlsIjoidGlhZ29Ad29ya2h1Yi5wdCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3NjI4NDgzNSwiZXhwIjoxNzc2MzcxMjM1fQ.gGWlZQRSOcLO9cHcWgnvkdTBiCLUCOIhIonRH5qmRL8",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nome\": \"Coffee Break\",\r\n  \"descricao\": \"Café, chá, sumo e bolos para até 8 pessoas\",\r\n  \"preco\": 35,\r\n  \"disponivel\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/extra-services",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "extra-services"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Ver todos servicos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/extra-services?page=1&limit=5",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "extra-services"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Pesquisa por nome",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/extra-services?search=coffee",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "extra-services"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "coffee"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Editar servico",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGViNzhkZGJmOWI5NDM3NTA2M2FjOSIsImVtYWlsIjoidGlhZ29Ad29ya2h1Yi5wdCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3NjM1OTExNywiZXhwIjoxNzc2NDQ1NTE3fQ.S-_erO7ALTzqMQnU0IqJ4Nt_Ol6EVUcTEgnApT7UBV4",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"descricao\": \"Ola\",\r\n    \"disponivel\":\"false\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:3000/api/extra-services/69dfed8503e29adeaa9e7b01",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "extra-services",
+                "69dfed8503e29adeaa9e7b01"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

@@ -3,7 +3,7 @@
     "$oid": "69debb77dbf9b94375063ad4"
   },
   "tipo": "secretaria_partilhada",
-  "descricao": "Secretária ergonómica com cadeira confortável e luz natural.",
+  "descricao": "Ole.",
   "capacidade": 1,
   "equipamentos": [
     "Mesa ergonómica",
@@ -12,6 +12,143 @@
   ],
   "precoHora": 8,
   "precoDia": 45,
+  "imagens": [],
+  "ativo": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69dfdfbb4ce1e924c69c2a18"
+  },
+  "tipo": "sala_reuniao",
+  "descricao": "Sala de reuniões para até 8 pessoas com TV 65\" e videoconferência.",
+  "capacidade": 8,
+  "equipamentos": [
+    "TV 65\"",
+    "Webcam 4K",
+    "Microfone",
+    "Quadro branco",
+    "Wi-Fi",
+    "Ar condicionado"
+  ],
+  "precoHora": 25,
+  "precoDia": 180,
+  "imagens": [],
+  "ativo": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e00934f6b3a0d007c55c64"
+  },
+  "tipo": "secretaria_partilhada",
+  "descricao": "Secretária ergonómica com vista para o jardim",
+  "capacidade": 1,
+  "equipamentos": [
+    "Mesa regulável",
+    "Cadeira ergonómica",
+    "Wi-Fi 6",
+    "Monitor 27\""
+  ],
+  "precoHora": 9,
+  "precoDia": 50,
+  "imagens": [],
+  "ativo": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e0093ff6b3a0d007c55c66"
+  },
+  "tipo": "sala_reuniao",
+  "descricao": "Sala para 6 pessoas com videoconferência",
+  "capacidade": 6,
+  "equipamentos": [
+    "TV 65\"",
+    "Webcam",
+    "Microfone",
+    "Quadro branco"
+  ],
+  "precoHora": 28,
+  "precoDia": 190,
+  "imagens": [],
+  "ativo": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e00951f6b3a0d007c55c68"
+  },
+  "tipo": "gabinete_privado",
+  "descricao": "Gabinete privado para 4 pessoas",
+  "capacidade": 4,
+  "equipamentos": [
+    "2 mesas",
+    "4 cadeiras",
+    "Armário",
+    "Ar condicionado"
+  ],
+  "precoHora": 38,
+  "precoDia": 250,
+  "imagens": [],
+  "ativo": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e00959f6b3a0d007c55c6a"
+  },
+  "tipo": "auditorio",
+  "descricao": "Auditorio para eventos e formações",
+  "capacidade": 40,
+  "equipamentos": [
+    "Projetor 4K",
+    "Sistema de som",
+    "Palco",
+    "Microfones"
+  ],
+  "precoHora": 65,
+  "precoDia": 450,
+  "imagens": [],
+  "ativo": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e00964f6b3a0d007c55c6c"
+  },
+  "tipo": "secretaria_partilhada",
+  "descricao": "Secretária premium com luz natural",
+  "capacidade": 1,
+  "equipamentos": [
+    "Mesa de design",
+    "Cadeira premium",
+    "Wi-Fi 6",
+    "Tomadas USB-C"
+  ],
+  "precoHora": 12,
+  "precoDia": 65,
+  "imagens": [],
+  "ativo": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e112741425e341eacd4372"
+  },
+  "tipo": "sala_reuniao",
+  "descricao": "Sala de reuniões para até 8 pessoas com TV 65\" e videoconferência.",
+  "capacidade": 8,
+  "equipamentos": [
+    "TV 65\"",
+    "Webcam 4K",
+    "Microfone",
+    "Quadro branco",
+    "Wi-Fi",
+    "Ar condicionado"
+  ],
+  "precoHora": 25,
+  "precoDia": 180,
   "imagens": [],
   "ativo": true,
   "__v": 0

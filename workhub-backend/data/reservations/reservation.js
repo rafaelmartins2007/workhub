@@ -13,6 +13,7 @@ let ReservationSchema = new mongoose.Schema({
         default: "Pendente" 
     },
     observacoes: { type: String },
+    observacoesInternas: {type: String, default: ""},
     servicosExtras: [{ type: mongoose.Schema.Types.ObjectId, ref: "ExtraService" }]
 }, { timestamps: true });
 

@@ -8,10 +8,11 @@ const SpaceController = require('../data/spaces/spaceController');
 const spaceService = SpaceController(Space);
 
 // ====================== ROTAS PÚBLICAS (qualquer pessoa pode ver) ======================
+// Dentro de server/spaceRoutes.js - substitui apenas este bloco:
 router.get('/', async (req, res) => {
     try {
-        const spaces = await spaceService.findAll();
-        res.json(spaces);
+        const result = await spaceService.findAll(req);   // passa o req para ter acesso às queries
+        res.json(result);
     } catch (error) {
         res.status(500).json({ message: "Erro ao listar espaços", error: error.message });
     }

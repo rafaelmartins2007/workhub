@@ -11,16 +11,476 @@
   "data": {
     "$date": "2026-04-25T00:00:00.000Z"
   },
-  "horaInicio": "10:00",
-  "duracao": 4,
-  "estado": "Pendente",
-  "observacoes": "Quero secretária junto à janela",
+  "horaInicio": "09:30",
+  "duracao": 3,
+  "estado": "Confirmada",
+  "observacoes": "Reserva confirmada - cliente pagou adiantado",
   "servicosExtras": [],
   "createdAt": {
     "$date": "2026-04-15T19:13:50.328Z"
   },
   "updatedAt": {
-    "$date": "2026-04-15T19:13:50.328Z"
+    "$date": "2026-04-15T21:36:15.419Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e0073ff6b3a0d007c55c2b"
+  },
+  "user": {
+    "$oid": "69deb879dbf9b94375063acd"
+  },
+  "space": {
+    "$oid": "69debb77dbf9b94375063ad4"
+  },
+  "data": {
+    "$date": "2026-04-28T00:00:00.000Z"
+  },
+  "horaInicio": "10:00",
+  "duracao": 6,
+  "estado": "Pendente",
+  "observacoes": "Preciso de silêncio para trabalhar num projeto urgente",
+  "servicosExtras": [],
+  "createdAt": {
+    "$date": "2026-04-15T21:46:39.775Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T21:46:39.775Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e009aff6b3a0d007c55c78"
+  },
+  "user": {
+    "$oid": "69deb879dbf9b94375063acd"
+  },
+  "space": {
+    "$oid": "69debb77dbf9b94375063ad4"
+  },
+  "data": {
+    "$date": "2026-04-28T00:00:00.000Z"
+  },
+  "horaInicio": "09:00",
+  "duracao": 5,
+  "estado": "Confirmada",
+  "observacoes": "Trabalho concentrado",
+  "servicosExtras": [],
+  "createdAt": {
+    "$date": "2026-04-15T21:57:03.864Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T17:13:13.688Z"
+  },
+  "__v": 0,
+  "observacoesInternas": "O cliente reclamou"
+},
+{
+  "_id": {
+    "$oid": "69e009b8f6b3a0d007c55c7a"
+  },
+  "user": {
+    "$oid": "69deb879dbf9b94375063acd"
+  },
+  "space": {
+    "$oid": "69dfdfbb4ce1e924c69c2a18"
+  },
+  "data": {
+    "$date": "2026-04-30T00:00:00.000Z"
+  },
+  "horaInicio": "14:00",
+  "duracao": 3,
+  "estado": "Pendente",
+  "observacoes": "Reunião com cliente",
+  "servicosExtras": [
+    {
+      "$oid": "69dfed8503e29adeaa9e7b01"
+    }
+  ],
+  "createdAt": {
+    "$date": "2026-04-15T21:57:12.867Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T21:57:12.867Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e009bff6b3a0d007c55c7c"
+  },
+  "user": {
+    "$oid": "69deb879dbf9b94375063acd"
+  },
+  "space": {
+    "$oid": "69debb77dbf9b94375063ad4"
+  },
+  "data": {
+    "$date": "2026-05-02T00:00:00.000Z"
+  },
+  "horaInicio": "10:00",
+  "duracao": 8,
+  "estado": "Pendente",
+  "observacoes": "Dia inteiro de trabalho",
+  "servicosExtras": [],
+  "createdAt": {
+    "$date": "2026-04-15T21:57:19.753Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T21:57:19.753Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e009c8f6b3a0d007c55c7e"
+  },
+  "user": {
+    "$oid": "69deb879dbf9b94375063acd"
+  },
+  "space": {
+    "$oid": "69dfdfbb4ce1e924c69c2a18"
+  },
+  "data": {
+    "$date": "2026-05-05T00:00:00.000Z"
+  },
+  "horaInicio": "09:30",
+  "duracao": 4,
+  "estado": "Pendente",
+  "observacoes": "Brainstorming",
+  "servicosExtras": [],
+  "createdAt": {
+    "$date": "2026-04-15T21:57:28.902Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T21:57:28.902Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e009d0f6b3a0d007c55c80"
+  },
+  "user": {
+    "$oid": "69deb879dbf9b94375063acd"
+  },
+  "space": {
+    "$oid": "69debb77dbf9b94375063ad4"
+  },
+  "data": {
+    "$date": "2026-05-08T00:00:00.000Z"
+  },
+  "horaInicio": "11:00",
+  "duracao": 2,
+  "estado": "Pendente",
+  "observacoes": "Reunião rápida",
+  "servicosExtras": [
+    {
+      "$oid": "69dfed8503e29adeaa9e7b01"
+    }
+  ],
+  "createdAt": {
+    "$date": "2026-04-15T21:57:36.434Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T21:57:36.434Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e009d8f6b3a0d007c55c82"
+  },
+  "user": {
+    "$oid": "69deb879dbf9b94375063acd"
+  },
+  "space": {
+    "$oid": "69dfdfbb4ce1e924c69c2a18"
+  },
+  "data": {
+    "$date": "2026-05-10T00:00:00.000Z"
+  },
+  "horaInicio": "15:00",
+  "duracao": 6,
+  "estado": "Pendente",
+  "observacoes": "Workshop",
+  "servicosExtras": [],
+  "createdAt": {
+    "$date": "2026-04-15T21:57:44.665Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T21:57:44.665Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e009dff6b3a0d007c55c84"
+  },
+  "user": {
+    "$oid": "69deb879dbf9b94375063acd"
+  },
+  "space": {
+    "$oid": "69debb77dbf9b94375063ad4"
+  },
+  "data": {
+    "$date": "2026-05-12T00:00:00.000Z"
+  },
+  "horaInicio": "08:30",
+  "duracao": 7,
+  "estado": "Pendente",
+  "observacoes": "Dia de foco",
+  "servicosExtras": [],
+  "createdAt": {
+    "$date": "2026-04-15T21:57:51.697Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T21:57:51.697Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e009e7f6b3a0d007c55c86"
+  },
+  "user": {
+    "$oid": "69deb879dbf9b94375063acd"
+  },
+  "space": {
+    "$oid": "69dfdfbb4ce1e924c69c2a18"
+  },
+  "data": {
+    "$date": "2026-05-15T00:00:00.000Z"
+  },
+  "horaInicio": "10:00",
+  "duracao": 5,
+  "estado": "Pendente",
+  "observacoes": "Apresentação",
+  "servicosExtras": [
+    {
+      "$oid": "69dfed8503e29adeaa9e7b01"
+    }
+  ],
+  "createdAt": {
+    "$date": "2026-04-15T21:57:59.993Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T21:57:59.993Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e009edf6b3a0d007c55c88"
+  },
+  "user": {
+    "$oid": "69deb879dbf9b94375063acd"
+  },
+  "space": {
+    "$oid": "69debb77dbf9b94375063ad4"
+  },
+  "data": {
+    "$date": "2026-05-18T00:00:00.000Z"
+  },
+  "horaInicio": "13:00",
+  "duracao": 4,
+  "estado": "Pendente",
+  "observacoes": "Trabalho em equipa",
+  "servicosExtras": [],
+  "createdAt": {
+    "$date": "2026-04-15T21:58:05.688Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T21:58:05.688Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e009f4f6b3a0d007c55c8a"
+  },
+  "user": {
+    "$oid": "69deb879dbf9b94375063acd"
+  },
+  "space": {
+    "$oid": "69dfdfbb4ce1e924c69c2a18"
+  },
+  "data": {
+    "$date": "2026-05-20T00:00:00.000Z"
+  },
+  "horaInicio": "16:00",
+  "duracao": 3,
+  "estado": "Pendente",
+  "observacoes": "Reunião final",
+  "servicosExtras": [],
+  "createdAt": {
+    "$date": "2026-04-15T21:58:12.036Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T21:58:12.036Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e009fbf6b3a0d007c55c8c"
+  },
+  "user": {
+    "$oid": "69deb879dbf9b94375063acd"
+  },
+  "space": {
+    "$oid": "69debb77dbf9b94375063ad4"
+  },
+  "data": {
+    "$date": "2026-05-22T00:00:00.000Z"
+  },
+  "horaInicio": "09:00",
+  "duracao": 8,
+  "estado": "Pendente",
+  "observacoes": "Dia completo",
+  "servicosExtras": [],
+  "createdAt": {
+    "$date": "2026-04-15T21:58:19.181Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T21:58:19.181Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e00a01f6b3a0d007c55c8e"
+  },
+  "user": {
+    "$oid": "69deb879dbf9b94375063acd"
+  },
+  "space": {
+    "$oid": "69dfdfbb4ce1e924c69c2a18"
+  },
+  "data": {
+    "$date": "2026-05-25T00:00:00.000Z"
+  },
+  "horaInicio": "11:00",
+  "duracao": 4,
+  "estado": "Pendente",
+  "observacoes": "Formação",
+  "servicosExtras": [],
+  "createdAt": {
+    "$date": "2026-04-15T21:58:25.824Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T21:58:25.824Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e00a07f6b3a0d007c55c90"
+  },
+  "user": {
+    "$oid": "69deb879dbf9b94375063acd"
+  },
+  "space": {
+    "$oid": "69debb77dbf9b94375063ad4"
+  },
+  "data": {
+    "$date": "2026-05-28T00:00:00.000Z"
+  },
+  "horaInicio": "14:00",
+  "duracao": 3,
+  "estado": "Pendente",
+  "observacoes": "Reunião",
+  "servicosExtras": [],
+  "createdAt": {
+    "$date": "2026-04-15T21:58:31.858Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T21:58:31.858Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e00a0ef6b3a0d007c55c92"
+  },
+  "user": {
+    "$oid": "69deb879dbf9b94375063acd"
+  },
+  "space": {
+    "$oid": "69dfdfbb4ce1e924c69c2a18"
+  },
+  "data": {
+    "$date": "2026-05-30T00:00:00.000Z"
+  },
+  "horaInicio": "10:00",
+  "duracao": 6,
+  "estado": "Pendente",
+  "observacoes": "Evento",
+  "servicosExtras": [
+    {
+      "$oid": "69dfed8503e29adeaa9e7b01"
+    }
+  ],
+  "createdAt": {
+    "$date": "2026-04-15T21:58:38.244Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T21:58:38.244Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e00a14f6b3a0d007c55c94"
+  },
+  "user": {
+    "$oid": "69deb879dbf9b94375063acd"
+  },
+  "space": {
+    "$oid": "69debb77dbf9b94375063ad4"
+  },
+  "data": {
+    "$date": "2026-06-02T00:00:00.000Z"
+  },
+  "horaInicio": "09:00",
+  "duracao": 5,
+  "estado": "Pendente",
+  "observacoes": "Trabalho normal",
+  "servicosExtras": [],
+  "createdAt": {
+    "$date": "2026-04-15T21:58:44.722Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T21:58:44.722Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e13bb43ba843ff95e6097d"
+  },
+  "user": {
+    "$oid": "69deb879dbf9b94375063acd"
+  },
+  "space": {
+    "$oid": "69debb77dbf9b94375063ad4"
+  },
+  "data": {
+    "$date": "2026-04-25T00:00:00.000Z"
+  },
+  "horaInicio": "10:00",
+  "duracao": 4,
+  "estado": "Pendente",
+  "observacoes": "aaaaaaaaaaaaaaa",
+  "observacoesInternas": "",
+  "servicosExtras": [],
+  "createdAt": {
+    "$date": "2026-04-16T19:42:44.450Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T19:42:44.450Z"
   },
   "__v": 0
 }]

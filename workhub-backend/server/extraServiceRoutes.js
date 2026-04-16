@@ -17,8 +17,8 @@ const isAdmin = (req, res, next) => {
 // ====================== ROTAS PÚBLICAS ======================
 router.get('/', async (req, res) => {
     try {
-        const services = await extraServiceService.findAll();
-        res.json(services);
+        const result = await extraServiceService.findAll(req);
+        res.json(result);
     } catch (error) {
         res.status(500).json({ message: "Erro ao listar serviços extras", error: error.message });
     }
