@@ -1,6 +1,9 @@
 spaces que estao desativados nao podem aparecer para o cliente e utilizador.
 
-implementar pesquisa por capacidade, por nome do espaco e por intervalo de datas (RESERVAS)
-O mesmo se aplica para o espaco
-
 um cliente nao deve conseguir usar um espaco numa hora que ja tenha sido reservado por outro cliente
+
+edit do users
+
+order
+
+recuperar password
