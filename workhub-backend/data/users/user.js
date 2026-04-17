@@ -11,7 +11,12 @@ let UserSchema = new mongoose.Schema({
     empresa:   { type: String },
     password:  { type: String, required: true },
     role:      { type: String, enum: ["client", "admin"], default: "client" },
-    ativo:     { type: Boolean, default: true }
+    ativo:     { type: Boolean, default: true },
+
+    // === CAMPOS PARA RECUPERAÇÃO DE PASSWORD ===
+    resetPasswordToken:   { type: String, default: null },
+    resetPasswordExpires: { type: Date,   default: null }
+
 }, { timestamps: true });
 
 let User = mongoose.model("User", UserSchema);

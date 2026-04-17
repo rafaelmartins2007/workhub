@@ -13,28 +13,46 @@ function SpaceController(SpaceModel) {
         return new Promise((resolve, reject) => {
             const page = parseInt(req.query.page) || 1;
             const limit = parseInt(req.query.limit) || 10;
-            const search = req.query.search || "";           // pesquisa no tipo
+            const search = req.query.search || "";
             const capacidade = parseInt(req.query.capacidade);
-            const data = req.query.data;                     // formato YYYY-MM-DD
 
             const skip = (page - 1) * limit;
 
             let query = { ativo: true };
 
-            // 1. Pesquisa apenas no campo "tipo"
             if (search) {
                 query.tipo = { $regex: search, $options: 'i' };
             }
-
-            // 2. Capacidade tem de ser exatamente igual
             if (capacidade) {
                 query.capacidade = capacidade;
+            }
+
+            // ====================== ORDENACAO ======================
+            let sortOption = { precoHora: 1 }; // default: mais barato primeiro
+
+            const sortBy = req.query.sort || 'preco';
+            const order = req.query.order === 'desc' ? -1 : 1;
+
+            switch (sortBy.toLowerCase()) {
+                case 'preco':
+                case 'precohora':
+                    sortOption = { precoHora: order };
+                    break;
+                case 'capacidade':
+                    sortOption = { capacidade: order };
+                    break;
+                case 'popularidade':
+                    // Placeholder (pode ser melhorado mais tarde com contagem de reservas)
+                    sortOption = { precoHora: order }; // por enquanto ordena por preço
+                    break;
+                default:
+                    sortOption = { precoHora: order };
             }
 
             SpaceModel.find(query)
                 .skip(skip)
                 .limit(limit)
-                .sort({ precoHora: 1 })
+                .sort(sortOption)
                 .then(spaces => {
                     SpaceModel.countDocuments(query)
                         .then(total => {
@@ -45,7 +63,8 @@ function SpaceController(SpaceModel) {
                                     page,
                                     limit,
                                     totalPages: Math.ceil(total / limit)
-                                }
+                                },
+                                sort: { field: sortBy, order: order === 1 ? 'asc' : 'desc' }
                             });
                         })
                         .catch(err => reject(err));
@@ -54,11 +73,13 @@ function SpaceController(SpaceModel) {
         });
     }
 
-    // Outras funções mantidas (não mudam)
     function findById(id) {
         return new Promise((resolve, reject) => {
-            SpaceModel.findById(id)
-                .then(space => resolve(space))
+            SpaceModel.findOne({ _id: id, ativo: true })
+                .then(space => {
+                    if (!space) return reject(new Error("Espaço não encontrado ou inativo"));
+                    resolve(space);
+                })
                 .catch(err => reject(err));
         });
     }
@@ -70,7 +91,7 @@ function SpaceController(SpaceModel) {
 
     function update(id, space) {
         return new Promise((resolve, reject) => {
-            SpaceModel.findByIdAndUpdate(id, space)
+            SpaceModel.findByIdAndUpdate(id, space, { new: true })
                 .then(() => resolve())
                 .catch(err => reject(err));
         });

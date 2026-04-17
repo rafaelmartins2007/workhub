@@ -1,43 +1,83 @@
 // data/users/service.js
 const bcrypt = require('bcryptjs');
-const config = require('../../server/config');   // caminho para o config.js que criámos
+const crypto = require('crypto');        // ← novo
+const config = require('../../server/config');
 
 function UserService(User) {
 
-    // Cria password encriptada
     function createPassword(user) {
         return bcrypt.hash(user.password, config.saltRounds);
     }
 
-    // Verifica se a password está correta
     function comparePassword(password, hash) {
+        console.log(hash);
         return bcrypt.compare(password, hash);
     }
 
-    // Middleware de autorização (igual ao das aulas)
-    function authorize(scopes) {
-        return (request, response, next) => {
-            const { roleUser } = request;   // vem do middleware de autenticação
+    // ====================== RECUPERAÇÃO DE PASSWORD ======================
+    async function generateResetToken(user) {
+        const token = crypto.randomBytes(32).toString('hex');
+        const expires = Date.now() + 3600000; // 1 hora
 
-            console.log("route scopes:", scopes);
-            console.log("user scopes:", roleUser);
+        user.resetPasswordToken = token;
+        user.resetPasswordExpires = expires;
+        await user.save();
 
-            const hasAuthorization = scopes.some((scope) => 
-                roleUser.scopes.includes(scope)
-            );
+        return token;
+    }
 
-            if (roleUser && hasAuthorization) {
-                next();
-            } else {
-                response.status(403).json({ message: "Forbidden - Acesso negado" });
+    async function resetPassword(token, newPassword) {
+        const user = await User.findOne({
+            resetPasswordToken: token,
+            resetPasswordExpires: { $gt: Date.now() }
+        });
+
+        if (!user) {
+            throw new Error("Token inválido ou expirado");
+        }
+
+        user.password = await createPassword({ password: newPassword });
+        user.resetPasswordToken = null;
+        user.resetPasswordExpires = null;
+
+        await user.save();
+        return user;
+    }
+
+    function update(id, updates) { /* mantido igual ao anterior */ 
+        return new Promise(async (resolve, reject) => {
+            try {
+                if (updates.password) {
+                    updates.password = await createPassword({ password: updates.password });
+                }
+                delete updates._id;
+
+                const updatedUser = await User.findByIdAndUpdate(id, updates, { new: true, runValidators: true })
+                    .select('-password');
+                if (!updatedUser) return reject(new Error("Utilizador não encontrado"));
+                resolve(updatedUser);
+            } catch (error) {
+                reject(error);
             }
+        });
+    }
+
+    function authorize(scopes) { /* mantido igual */ 
+        return (request, response, next) => {
+            const { roleUser } = request;
+            const hasAuthorization = scopes.some(scope => roleUser.scopes.includes(scope));
+            if (roleUser && hasAuthorization) next();
+            else response.status(403).json({ message: "Forbidden - Acesso negado" });
         };
     }
 
     return {
         createPassword,
         comparePassword,
-        authorize
+        update,
+        authorize,
+        generateResetToken,   // ← novo
+        resetPassword         // ← novo
     };
 }
 

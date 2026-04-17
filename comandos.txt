@@ -16,3 +16,7 @@ Login - http://127.0.0.1:3000/api/auth/login
 Registro - http://127.0.0.1:3000/api/auth/register
 Spaces - http://127.0.0.1:3000/api/spaces
 Profile - http://127.0.0.1:3000/api/profile
+Editar user como adm - http://127.0.0.1:3000/api/users/ID_DO_UTILIZADOR e token do adm
+Editar user como cliente - http://127.0.0.1:3000/api/users/me e token do cliente
+Ordenar preco - http://127.0.0.1:3000/api/spaces?sort=preco&order=asc
+Ordenar por capacidade - http://127.0.0.1:3000/api/spaces?sort=capacidade&order=asc

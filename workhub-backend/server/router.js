@@ -7,10 +7,20 @@ const spaceRoutes = require('./spaceRoutes');
 const reservationRoutes = require('./reservationRoutes');
 const extraServiceRoutes = require('./extraServiceRoutes');
 const userRoutes = require('./userRoutes');
+const notificationRoutes = require('./notificationRoutes');
+
 
 // ====================== ROTAS PÚBLICAS ======================
 router.post('/auth/register', authController.register);
 router.post('/auth/login',    authController.login);
+
+
+// ====================== ROTAS DE NOTIFICAÇÕES ======================
+router.use('/notifications', notificationRoutes);
+
+// === NOVAS ROTAS DE RECUPERAÇÃO ===
+router.post('/auth/forgot-password', authController.forgotPassword);
+router.post('/auth/reset-password',  authController.resetPassword);
 
 // ====================== ROTAS DOS ESPAÇOS ======================
 router.use('/spaces', spaceRoutes);

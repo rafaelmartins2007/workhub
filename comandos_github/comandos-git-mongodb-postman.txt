@@ -12,14 +12,11 @@ cd workhub
 2. ATUALIZAR o projeto (quando já tens o repositório e queres as últimas alterações)
 git pull origin main
 
-
-3. VER o estado do projeto (quais ficheiros estão modificados)
-git status
-
-
-4. ADICIONAR todas as alterações novas
+3. ADICIONAR todas as alterações novas
 git add .
 
+4. VER o estado do projeto (quais ficheiros estão modificados)
+git status
 
 5. FAZER COMMIT (guardar as alterações)
 git commit -m ""
