@@ -25,19 +25,21 @@
   },
   "nome": "João Silva",
   "email": "joao@teste.com",
-  "contacto": "912345678",
+  "contacto": "912345677",
   "morada": "Rua Exemplo 123, Porto",
   "nif": "123456789",
-  "password": "$2b$10$1Gz.V7DoaQ1qejvYU.ZnSeXerZ.cG2G0r.V9SkkpDK9Hq9l0bJF22",
+  "password": "$2b$10$ln5wEvUXeoTEZjLGcRY42.xoNiA.JR361p8ZzkC9GtDNCfZurdd/G",
   "role": "client",
   "createdAt": {
     "$date": "2026-04-14T21:58:17.532Z"
   },
   "updatedAt": {
-    "$date": "2026-04-16T20:00:39.097Z"
+    "$date": "2026-04-17T22:17:17.097Z"
   },
   "__v": 0,
-  "ativo": true
+  "ativo": true,
+  "resetPasswordExpires": null,
+  "resetPasswordToken": null
 },
 {
   "_id": {

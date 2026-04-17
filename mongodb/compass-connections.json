@@ -8,11 +8,28 @@
       "id": "3324f505-4d70-4eba-bd35-37573510c138",
       "lastUsed": {
         "$date": {
-          "$numberLong": "1776276935310"
+          "$numberLong": "1776466906121"
         }
       },
       "favorite": {
         "name": ""
+      },
+      "savedConnectionType": "recent",
+      "connectionOptions": {
+        "connectionString": "mongodb://localhost:27017/",
+        "oidc": {}
+      }
+    },
+    {
+      "id": "f85d52a5-8945-4c3c-8bd9-f4f0cc09d5e5",
+      "lastUsed": {
+        "$date": {
+          "$numberLong": "1776466905102"
+        }
+      },
+      "favorite": {
+        "name": "Teste",
+        "color": "color3"
       },
       "savedConnectionType": "recent",
       "connectionOptions": {

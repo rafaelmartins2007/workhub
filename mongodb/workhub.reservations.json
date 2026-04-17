@@ -459,7 +459,7 @@
 },
 {
   "_id": {
-    "$oid": "69e13bb43ba843ff95e6097d"
+    "$oid": "69e2ab7c6570e0516349091a"
   },
   "user": {
     "$oid": "69deb879dbf9b94375063acd"
@@ -470,17 +470,17 @@
   "data": {
     "$date": "2026-04-25T00:00:00.000Z"
   },
-  "horaInicio": "10:00",
+  "horaInicio": "15:00",
   "duracao": 4,
   "estado": "Pendente",
   "observacoes": "aaaaaaaaaaaaaaa",
   "observacoesInternas": "",
   "servicosExtras": [],
   "createdAt": {
-    "$date": "2026-04-16T19:42:44.450Z"
+    "$date": "2026-04-17T21:51:56.958Z"
   },
   "updatedAt": {
-    "$date": "2026-04-16T19:42:44.450Z"
+    "$date": "2026-04-17T21:51:56.958Z"
   },
   "__v": 0
 }]
