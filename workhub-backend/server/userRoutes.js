@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const User = require('../data/users/user');
-const userService = require('../data/users');   // ← tem a função update
+const userService = require('../data/users');
 const verifyToken = require('./middleware/authMiddleware');
 
 const isAdmin = (req, res, next) => {
@@ -37,9 +37,9 @@ router.put('/me', verifyToken, async (req, res) => {
             user: updatedUser
         });
     } catch (error) {
-        res.status(500).json({ 
-            message: "Erro ao atualizar perfil", 
-            error: error.message 
+        res.status(500).json({
+            message: "Erro ao atualizar perfil",
+            error: error.message
         });
     }
 });
@@ -59,7 +59,7 @@ router.get('/', verifyToken, isAdmin, async (req, res) => {
 router.put('/:id', verifyToken, isAdmin, async (req, res) => {
     try {
         const updatedUser = await userService.update(req.params.id, req.body);
-        
+
         res.json({
             message: "Utilizador atualizado com sucesso",
             user: updatedUser
@@ -68,9 +68,9 @@ router.put('/:id', verifyToken, isAdmin, async (req, res) => {
         if (error.message.includes("E11000")) {
             return res.status(400).json({ message: "Email ou NIF já está em uso por outro utilizador" });
         }
-        res.status(500).json({ 
-            message: "Erro ao atualizar utilizador", 
-            error: error.message 
+        res.status(500).json({
+            message: "Erro ao atualizar utilizador",
+            error: error.message
         });
     }
 });
