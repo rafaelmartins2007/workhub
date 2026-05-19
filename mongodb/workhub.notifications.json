@@ -1,0 +1,22 @@
+[{
+  "_id": {
+    "$oid": "69e2ab7c6570e0516349091c"
+  },
+  "user": {
+    "$oid": "69deb879dbf9b94375063acd"
+  },
+  "reservation": {
+    "$oid": "69e2ab7c6570e0516349091a"
+  },
+  "tipo": "reserva_criada",
+  "titulo": "Reserva criada com sucesso",
+  "mensagem": "A tua reserva para o dia 2026-04-25 foi registada com sucesso!",
+  "lida": false,
+  "createdAt": {
+    "$date": "2026-04-17T21:51:56.963Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-17T21:51:56.963Z"
+  },
+  "__v": 0
+}]
