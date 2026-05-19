@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
-import { Button, message } from "antd";
+import { message } from "antd";
 import config from "../../config";
 import "./RegisterForm.css";
 
 const RegisterForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
     const onSubmit = async (data) => {
@@ -35,82 +36,157 @@ const RegisterForm = () => {
     };
 
     return (
-        <div className="register-container">
-            <div className="register-card">
-                <h1 className="register-title">Criar Conta</h1>
+        <div className="auth-page">
+            <div className="auth-card scrollable">
 
-                <form className="register-form" onSubmit={handleSubmit(onSubmit)}>
+                <div className="auth-brand">
+                    <div className="auth-logo">W</div>
+                    <span>WorkHub</span>
+                </div>
 
-                    <label>Nome completo</label>
-                    <input
-                        {...register("nome", { required: true })}
-                        placeholder="João Silva"
-                    />
-                    {errors.nome && <p style={{ color: "red", fontSize: "13px", marginTop: "-14px", marginBottom: "14px" }}>Nome é obrigatório</p>}
+                <div className="auth-header">
+                    <h1>Criar conta</h1>
+                    <p>Preenche os teus dados para começar</p>
+                </div>
 
-                    <label>Email</label>
-                    <input
-                        {...register("email", { required: true })}
-                        type="email"
-                        placeholder="email@exemplo.com"
-                    />
-                    {errors.email && <p style={{ color: "red", fontSize: "13px", marginTop: "-14px", marginBottom: "14px" }}>Email é obrigatório</p>}
+                <form className="auth-form" onSubmit={handleSubmit(onSubmit)} noValidate>
 
-                    <label>Contacto</label>
-                    <input
-                        {...register("contacto", { required: true })}
-                        placeholder="912345678"
-                    />
-                    {errors.contacto && <p style={{ color: "red", fontSize: "13px", marginTop: "-14px", marginBottom: "14px" }}>Contacto é obrigatório</p>}
+                    {/* ── Dados pessoais ── */}
+                    <p className="auth-section-label">Dados pessoais</p>
 
-                    <label>Morada</label>
-                    <input
-                        {...register("morada", { required: true })}
-                        placeholder="Rua Exemplo, 123 - Porto"
-                    />
-                    {errors.morada && <p style={{ color: "red", fontSize: "13px", marginTop: "-14px", marginBottom: "14px" }}>Morada é obrigatória</p>}
+                    <div className="field-group">
+                        <label htmlFor="nome">Nome completo</label>
+                        <input
+                            id="nome"
+                            placeholder="João Silva"
+                            className={errors.nome ? "field-error" : ""}
+                            {...register("nome", { required: "Nome é obrigatório" })}
+                        />
+                        {errors.nome && <span className="error-msg">{errors.nome.message}</span>}
+                    </div>
 
-                    <label>NIF</label>
-                    <input
-                        {...register("nif", { required: true })}
-                        placeholder="123456789"
-                    />
-                    {errors.nif && <p style={{ color: "red", fontSize: "13px", marginTop: "-14px", marginBottom: "14px" }}>NIF é obrigatório</p>}
+                    <div className="field-row">
+                        <div className="field-group">
+                            <label htmlFor="email">Email</label>
+                            <input
+                                id="email"
+                                type="email"
+                                placeholder="email@exemplo.com"
+                                className={errors.email ? "field-error" : ""}
+                                {...register("email", {
+                                    required: "Email é obrigatório",
+                                    pattern: { value: /^\S+@\S+\.\S+$/, message: "Email inválido" }
+                                })}
+                            />
+                            {errors.email && <span className="error-msg">{errors.email.message}</span>}
+                        </div>
 
-                    <label>Atividade (opcional)</label>
-                    <input
-                        {...register("atividade")}
-                        placeholder="Freelancer, Designer, etc."
-                    />
+                        <div className="field-group">
+                            <label htmlFor="contacto">Contacto</label>
+                            <input
+                                id="contacto"
+                                placeholder="912 345 678"
+                                className={errors.contacto ? "field-error" : ""}
+                                {...register("contacto", { required: "Contacto é obrigatório" })}
+                            />
+                            {errors.contacto && <span className="error-msg">{errors.contacto.message}</span>}
+                        </div>
+                    </div>
 
-                    <label>Empresa (opcional)</label>
-                    <input
-                        {...register("empresa")}
-                        placeholder="Nome da empresa"
-                    />
+                    <div className="field-row">
+                        <div className="field-group">
+                            <label htmlFor="nif">NIF</label>
+                            <input
+                                id="nif"
+                                placeholder="123456789"
+                                className={errors.nif ? "field-error" : ""}
+                                {...register("nif", { required: "NIF é obrigatório" })}
+                            />
+                            {errors.nif && <span className="error-msg">{errors.nif.message}</span>}
+                        </div>
 
-                    <label>Password</label>
-                    <input
-                        {...register("password", { required: true })}
-                        type="password"
-                        placeholder="Escolha uma password"
-                    />
-                    {errors.password && <p style={{ color: "red", fontSize: "13px", marginTop: "-14px", marginBottom: "14px" }}>Password é obrigatória</p>}
+                        <div className="field-group">
+                            <label htmlFor="morada">Morada</label>
+                            <input
+                                id="morada"
+                                placeholder="Rua Exemplo, 123"
+                                className={errors.morada ? "field-error" : ""}
+                                {...register("morada", { required: "Morada é obrigatória" })}
+                            />
+                            {errors.morada && <span className="error-msg">{errors.morada.message}</span>}
+                        </div>
+                    </div>
 
-                    <Button
-                        type="primary"
-                        htmlType="submit"
-                        className="register-button"
-                        loading={loading}
-                        size="large"
+                    {/* ── Informação profissional ── */}
+                    <p className="auth-section-label">Informação profissional</p>
+
+                    <div className="field-row">
+                        <div className="field-group">
+                            <label htmlFor="atividade">
+                                Atividade
+                                <span className="optional-tag">opcional</span>
+                            </label>
+                            <input
+                                id="atividade"
+                                placeholder="Freelancer, Designer…"
+                                {...register("atividade")}
+                            />
+                        </div>
+
+                        <div className="field-group">
+                            <label htmlFor="empresa">
+                                Empresa
+                                <span className="optional-tag">opcional</span>
+                            </label>
+                            <input
+                                id="empresa"
+                                placeholder="Nome da empresa"
+                                {...register("empresa")}
+                            />
+                        </div>
+                    </div>
+
+                    {/* ── Segurança ── */}
+                    <p className="auth-section-label">Segurança</p>
+
+                    <div className="field-group password-group">
+                        <label htmlFor="password">Password</label>
+                        <div className="password-wrap">
+                            <input
+                                id="password"
+                                type={showPassword ? "text" : "password"}
+                                placeholder="••••••••"
+                                className={errors.password ? "field-error" : ""}
+                                {...register("password", {
+                                    required: "Password é obrigatória",
+                                    minLength: { value: 6, message: "Mínimo 6 caracteres" }
+                                })}
+                            />
+                            <button
+                                type="button"
+                                className="password-toggle"
+                                onClick={() => setShowPassword(v => !v)}
+                                aria-label={showPassword ? "Esconder password" : "Mostrar password"}
+                            >
+                                {showPassword ? "Ocultar" : "Mostrar"}
+                            </button>
+                        </div>
+                        {errors.password && <span className="error-msg">{errors.password.message}</span>}
+                    </div>
+
+                    <button
+                        type="submit"
+                        className={`auth-btn${loading ? " loading" : ""}`}
+                        disabled={loading}
                     >
-                        Criar Conta
-                    </Button>
+                        {loading ? <span className="spinner" /> : "Criar conta"}
+                    </button>
                 </form>
 
-                <div className="register-link">
-                    Já tens conta? <Link to="/login">Fazer Login</Link>
-                </div>
+                <p className="auth-footer">
+                    Já tens conta?{" "}
+                    <Link to="/login">Fazer login</Link>
+                </p>
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
-import { Button, message } from "antd";
+import { message } from "antd";
 import config from "../../config";
 import "./LoginForm.css";
 
@@ -9,9 +9,9 @@ const LoginForm = () => {
     const { register, handleSubmit } = useForm();
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-
     const onSubmit = async (data) => {
         setLoading(true);
+
         try {
             const response = await fetch(`${config.API_BASE}/auth/login`, {
                 method: "POST",
@@ -23,45 +23,69 @@ const LoginForm = () => {
 
             if (response.ok && result.token) {
                 localStorage.setItem("token", result.token);
-                localStorage.setItem("user", JSON.stringify(result.user));
-                message.success("Login realizado com sucesso!");
-                navigate("/");
+                localStorage.setItem("user", JSON.stringify(result.user || {}));
+                
+                message.success("Login efetuado com sucesso!");
+                navigate("/spaces");
             } else {
                 message.error(result.message || "Email ou password incorretos");
             }
-        } catch {
-            message.error("Erro de ligação ao servidor");
+        } catch (error) {
+            console.error(error);
+            message.error("Erro ao ligar ao servidor");
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="login-container">
-            <div className="login-card">
-                <h1 className="login-title">WorkHub Spaces</h1>
+        <div className="auth-page">
+            <div className="auth-card">
 
-                <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
-                    <label>Email</label>
-                    <input {...register("email")} type="email" placeholder="email@exemplo.com" />
+                <div className="auth-brand">
+                    <div className="auth-logo">W</div>
+                    <span>WorkHub</span>
+                </div>
 
-                    <label>Password</label>
-                    <input {...register("password")} type="password" placeholder="********" />
+                <div className="auth-header">
+                    <h1>Bem-vindo de volta</h1>
+                    <p>Entra na tua conta para continuar</p>
+                </div>
 
-                    <Button
-                        type="primary"
-                        htmlType="submit"
-                        className="login-button"
-                        loading={loading}
-                        size="large"
+                <form className="auth-form" onSubmit={handleSubmit(onSubmit)} noValidate>
+                    <div className="field-group">
+                        <label htmlFor="email">Email</label>
+                        <input
+                            id="email"
+                            type="email"
+                            placeholder="email@exemplo.com"
+                            {...register("email", { required: true })}
+                        />
+                    </div>
+
+                    <div className="field-group">
+                        <label htmlFor="password">Password</label>
+                        <input
+                            id="password"
+                            type="password"
+                            placeholder="••••••••"
+                            {...register("password", { required: true })}
+                        />
+                    </div>
+
+                    <button
+                        type="submit"
+                        className="auth-btn"
+                        disabled={loading}
                     >
-                        Entrar
-                    </Button>
+                        {loading ? "A entrar..." : "Entrar"}
+                    </button>
                 </form>
 
-                <div className="login-link">
-                    Não tens conta? <Link to="/register">Regista-te</Link>
-                </div>
+                <p className="auth-footer">
+                    Não tens conta?{" "}
+                    <Link to="/register">Regista-te</Link>
+                </p>
             </div>
         </div>
     );

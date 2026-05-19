@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+.spaces-page {
+    min-height: 100vh;
+    background-color: #f4f3ef;
+    padding: 40px 48px;
+    font-family: 'DM Sans', sans-serif;
+}
+
+/* ── Header ── */
+
+.spaces-header {
+    margin-bottom: 28px;
+}
+
+.spaces-header h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #1a1a1a;
+    letter-spacing: -0.4px;
+    line-height: 1.2;
+    margin-bottom: 6px;
+}
+
+.spaces-header p {
+    font-size: 14px;
+    color: #888;
+}
+
+/* ── Search ── */
+
+.search-bar {
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    width: 100%;
+    max-width: 360px;
+    padding: 10px 12px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    color: #1a1a1a;
+    background: #fff;
+    border: 1px solid #e5e3dd;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    -webkit-appearance: none;
+}
+
+.search-bar input::placeholder { color: #c0bdb6; }
+
+.search-bar input:hover { border-color: #ccc; }
+
+.search-bar input:focus {
+    border-color: #1a1a1a;
+    box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.06);
+}
+
+/* ── Table ── */
+
+.ant-table-wrapper {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e5e3dd;
+    overflow: hidden;
+}
+
+/* ── Details button ── */
+
+.btn-details {
+    display: inline-block;
+    padding: 5px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    color: #1a1a1a;
+    background: #f4f3ef;
+    border: 1px solid #e5e3dd;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.btn-details:hover {
+    background: #eae9e4;
+    border-color: #ccc;
+}
