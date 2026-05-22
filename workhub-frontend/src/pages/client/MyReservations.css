@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+.reservations-page {
+    min-height: 100vh;
+    background-color: #f4f3ef;
+    padding: 40px 48px;
+    font-family: 'DM Sans', sans-serif;
+}
+
+/* ── Header ── */
+
+.reservations-header {
+    margin-bottom: 28px;
+}
+
+.reservations-header h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #1a1a1a;
+    letter-spacing: -0.4px;
+    line-height: 1.2;
+    margin-bottom: 6px;
+}
+
+.reservations-header p {
+    font-size: 14px;
+    color: #888;
+}
+
+/* ── Empty state ── */
+
+.reservations-empty {
+    text-align: center;
+    padding: 60px 0;
+    color: #888;
+    font-size: 14px;
+}
+
+/* ── Loading ── */
+
+.reservations-loading {
+    text-align: center;
+    padding: 60px 0;
+    color: #888;
+    font-size: 14px;
+}
+
+/* ── List ── */
+
+.reservations-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* ── Card ── */
+
+.reservation-card {
+    background: #fff;
+    border: 1px solid #e5e3dd;
+    border-radius: 12px;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    transition: box-shadow 0.15s;
+}
+
+.reservation-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.reservation-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.reservation-info h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1a1a;
+    text-transform: capitalize;
+}
+
+.reservation-info p {
+    font-size: 13px;
+    color: #666;
+}
+
+.reservation-info p strong {
+    color: #444;
+    font-weight: 500;
+}
+
+/* ── Status badge ── */
+
+.status {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-left: 6px;
+}
+
+.status.pendente   { background: #fff3cd; color: #856404; }
+.status.confirmada { background: #d4edda; color: #155724; }
+.status.cancelada  { background: #f8d7da; color: #721c24; }
+.status.concluída  { background: #e2e3e5; color: #383d41; }

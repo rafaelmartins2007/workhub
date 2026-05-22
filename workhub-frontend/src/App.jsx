@@ -1,14 +1,10 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 
-// import HomePage from "./pages/HomePage";
 import LoginForm from "./pages/login/LoginForm";
 import RegisterForm from "./pages/register/RegisterForm";
 import Spaces from "./pages/spaces/Spaces";
-// import MyReservations from "./pages/MyReservations";
-
-// Admin (vamos criar depois)
-// import AdminDashboard from "./pages/admin/AdminDashboard";
+import MyReservations from "./pages/client/MyReservations";
 
 function App() {
   return (
@@ -17,10 +13,7 @@ function App() {
       <Route path="/login" element={<LoginForm />} />
       <Route path="/register" element={<RegisterForm />} />
       <Route path="/spaces" element={<Spaces />} />
-      {/* <Route path="/my-reservations" element={<MyReservations />} /> */}
-
-      {/* Admin */}
-      {/* <Route path="/admin" element={<AdminDashboard />} /> */}
+      <Route path="/reservations/my" element={<MyReservations />} />
     </Routes>
   );
 }

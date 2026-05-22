@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 import "./Spaces.css";
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";     // ← Adicionado
 import { Table } from "antd";
 import qs from "query-string";
 import config from "../../config";
@@ -14,6 +14,8 @@ const Spaces = () => {
     const [pagination, setPagination] = useState({ current: 1, pageSize: PAGE_SIZE, total: 0 });
     const [search, setSearch] = useState("");
     const searchRef = useRef("");
+
+    const navigate = useNavigate();     
 
     const columns = [
         {
@@ -42,9 +44,12 @@ const Spaces = () => {
             title: "",
             key: "detalhes",
             render: (_, record) => (
-                <Link to={`/spaces/${record._id}`} className="btn-details">
+                <button 
+                    className="btn-details"
+                    onClick={() => navigate(`/spaces/${record._id}`)}   // ← Alterado para useNavigate
+                >
                     Ver Detalhes
-                </Link>
+                </button>
             ),
         },
     ];
