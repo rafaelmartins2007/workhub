@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+.profile-page {
+    min-height: 100vh;
+    background-color: #f4f3ef;
+    padding: 40px 48px;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.profile-card {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px 36px 36px;
+    border: 1px solid #e5e3dd;
+}
+
+/* ── Header ── */
+
+.profile-header { margin-bottom: 28px; }
+
+.profile-header h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #1a1a1a;
+    letter-spacing: -0.4px;
+    margin-bottom: 6px;
+}
+
+.profile-header p {
+    font-size: 14px;
+    color: #888;
+}
+
+/* ── Section label ── */
+
+.profile-section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #aaa;
+    margin: 24px 0 12px;
+}
+
+.profile-section-label:first-of-type { margin-top: 0; }
+
+/* ── Form ── */
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.field-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.field-group label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #444;
+    margin-bottom: 6px;
+}
+
+.field-group input {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    color: #1a1a1a;
+    background: #fafaf8;
+    border: 1px solid #e5e3dd;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    -webkit-appearance: none;
+}
+
+.field-group input::placeholder { color: #c0bdb6; }
+.field-group input:hover { border-color: #ccc; }
+
+.field-group input:focus {
+    border-color: #1a1a1a;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.06);
+}
+
+.field-disabled {
+    background: #f4f3ef !important;
+    color: #aaa !important;
+    cursor: not-allowed;
+}
+
+.field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.optional-tag {
+    font-size: 11px;
+    font-weight: 400;
+    color: #aaa;
+    margin-left: 4px;
+}
+
+/* ── Button ── */
+
+.profile-btn {
+    width: 100%;
+    padding: 11px;
+    margin-top: 8px;
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+}
+
+.profile-btn:hover:not(:disabled) { background: #333; }
+.profile-btn:active:not(:disabled) { transform: scale(0.99); }
+.profile-btn:disabled { cursor: not-allowed; opacity: 0.6; }
+
+.spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: inline-block;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.loading { 
+    padding: 40px; 
+    text-align: center; 
+    color: #888; 
+    font-family: 'DM Sans', sans-serif;
+}

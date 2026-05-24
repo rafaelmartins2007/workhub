@@ -9,33 +9,34 @@ const LoginForm = () => {
     const { register, handleSubmit } = useForm();
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const onSubmit = async (data) => {
+
+    const onSubmit = (data) => login(data);
+
+    const login = (data) => {
         setLoading(true);
 
-        try {
-            const response = await fetch(`${config.API_BASE}/auth/login`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
+        fetch(`${config.API_BASE}/auth/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+        })
+            .then((res) => res.json())
+            .then((response) => {
+                if (response.auth) {
+                    localStorage.setItem("token", response.token);
+                    localStorage.setItem("user", JSON.stringify(response.user));
+                    message.success("Login efetuado com sucesso!");
+                    navigate("/spaces");
+                } else {
+                    message.error(response.message || "Email ou password incorretos");
+                }
+            })
+            .catch(() => {
+                message.error("Erro ao ligar ao servidor");
+            })
+            .finally(() => {
+                setLoading(false);
             });
-
-            const result = await response.json();
-
-            if (response.ok && result.token) {
-                localStorage.setItem("token", result.token);
-                localStorage.setItem("user", JSON.stringify(result.user || {}));
-                
-                message.success("Login efetuado com sucesso!");
-                navigate("/spaces");
-            } else {
-                message.error(result.message || "Email ou password incorretos");
-            }
-        } catch (error) {
-            console.error(error);
-            message.error("Erro ao ligar ao servidor");
-        } finally {
-            setLoading(false);
-        }
     };
 
     return (
@@ -73,11 +74,7 @@ const LoginForm = () => {
                         />
                     </div>
 
-                    <button
-                        type="submit"
-                        className="auth-btn"
-                        disabled={loading}
-                    >
+                    <button type="submit" className="auth-btn" disabled={loading}>
                         {loading ? "A entrar..." : "Entrar"}
                     </button>
                 </form>

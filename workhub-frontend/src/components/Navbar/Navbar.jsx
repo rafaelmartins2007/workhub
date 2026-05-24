@@ -1,5 +1,7 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { message } from "antd";
+import config from "../../config";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -7,17 +9,32 @@ const Navbar = () => {
     const location = useLocation();
     const [user, setUser] = useState(null);
 
-    // Relê o utilizador sempre que a rota muda (ex: após login e navigate)
     useEffect(() => {
         const storedUser = localStorage.getItem("user");
         setUser(storedUser ? JSON.parse(storedUser) : null);
     }, [location]);
 
     const handleLogout = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        setUser(null);
-        navigate("/login");
+        const token = localStorage.getItem("token");
+
+        fetch(`${config.API_BASE}/auth/logout`, {
+            method: "GET",
+            headers: { Authorization: `Bearer ${token}` },
+        })
+            .then((res) => res.json())
+            .then(() => {
+                localStorage.removeItem("token");
+                localStorage.removeItem("user");
+                setUser(null);
+                message.success("Sessão terminada");
+                navigate("/login");
+            })
+            .catch(() => {
+                localStorage.removeItem("token");
+                localStorage.removeItem("user");
+                setUser(null);
+                navigate("/login");
+            });
     };
 
     return (
@@ -35,7 +52,9 @@ const Navbar = () => {
                 <div className="navbar-right">
                     {user ? (
                         <>
-                            <span className="user-name">Olá, {user.nome}</span>
+                            <Link to="/profile" className="user-name">
+                                Olá, {user.nome}
+                            </Link>
                             <button onClick={handleLogout} className="btn-logout">
                                 Sair
                             </button>

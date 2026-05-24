@@ -11,21 +11,20 @@ const notificationRoutes = require('./notificationRoutes');
 
 
 // ====================== ROTAS PÚBLICAS ======================
-router.post('/auth/register', authController.register);
-router.post('/auth/login',    authController.login);
-
-
-// ====================== ROTAS DE NOTIFICAÇÕES ======================
-router.use('/notifications', notificationRoutes);
-
-// === NOVAS ROTAS DE RECUPERAÇÃO ===
+router.post('/auth/register',        authController.register);
+router.post('/auth/login',           authController.login);
 router.post('/auth/forgot-password', authController.forgotPassword);
 router.post('/auth/reset-password',  authController.resetPassword);
 
-// ====================== ROTAS DOS ESPAÇOS ======================
+// ====================== ROTAS DOS ESPAÇOS (públicas) ======================
 router.use('/spaces', spaceRoutes);
 
-// ====================== ROTAS DE UTILIZADORES (Admin) ======================
+// ====================== ROTAS PROTEGIDAS (requerem login) ======================
+router.use(verifyToken);
+
+router.get('/auth/logout', authController.logout);
+
+// ====================== ROTAS DE UTILIZADORES ======================
 router.use('/users', userRoutes);
 
 // ====================== ROTAS DAS RESERVAS ======================
@@ -34,8 +33,11 @@ router.use('/reservations', reservationRoutes);
 // ====================== ROTAS DE SERVIÇOS EXTRAS ======================
 router.use('/extra-services', extraServiceRoutes);
 
-// ====================== ROTAS DE TESTE ======================
-router.get('/profile', verifyToken, (req, res) => {
+// ====================== ROTAS DE NOTIFICAÇÕES ======================
+router.use('/notifications', notificationRoutes);
+
+// ====================== ROTA DE PERFIL (teste) ======================
+router.get('/profile', (req, res) => {
     res.json({ message: "Perfil carregado", user: req.user });
 });
 

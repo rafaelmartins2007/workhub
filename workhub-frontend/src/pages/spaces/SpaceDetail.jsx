@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";   // useNavigate como nas aulas
+import { useParams, useNavigate } from "react-router-dom";
 import config from "../../config";
 import "./SpaceDetail.css";
 
@@ -9,20 +9,23 @@ const SpaceDetail = () => {
     const [space, setSpace] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const fetchSpace = async () => {
-            try {
-                const res = await fetch(`${config.API_BASE}/spaces/${id}`);
-                const data = await res.json();
+    const fetchSpace = (spaceId) => {
+        fetch(`${config.API_BASE}/spaces/${spaceId}`, {
+            headers: { Accept: "application/json" },
+        })
+            .then((res) => res.json())
+            .then((data) => {
                 setSpace(data);
-            } catch (error) {
-                console.error("Erro ao carregar espaço:", error);
-            } finally {
                 setLoading(false);
-            }
-        };
+            })
+            .catch((err) => {
+                console.error("Erro ao carregar espaço:", err);
+                setLoading(false);
+            });
+    };
 
-        fetchSpace();
+    useEffect(() => {
+        fetchSpace(id);
     }, [id]);
 
     if (loading) return <p className="loading">A carregar detalhes...</p>;
@@ -40,13 +43,16 @@ const SpaceDetail = () => {
 
                 <div className="detail-info">
                     <div className="info-item">
-                        <strong>Preço por hora:</strong> {space.precoHora}€
+                        <strong>Preço por hora</strong>
+                        {space.precoHora}€
                     </div>
                     <div className="info-item">
-                        <strong>Preço por dia:</strong> {space.precoDia || "—"}€
+                        <strong>Preço por dia</strong>
+                        {space.precoDia || "—"}€
                     </div>
                     <div className="info-item">
-                        <strong>Capacidade:</strong> {space.capacidade} pessoas
+                        <strong>Capacidade</strong>
+                        {space.capacidade} pessoas
                     </div>
                 </div>
 
@@ -55,7 +61,7 @@ const SpaceDetail = () => {
                         <h3>Equipamentos incluídos</h3>
                         <ul>
                             {space.equipamentos.map((eq, index) => (
-                                <li key={index}>• {eq}</li>
+                                <li key={index}>{eq}</li>
                             ))}
                         </ul>
                     </div>
