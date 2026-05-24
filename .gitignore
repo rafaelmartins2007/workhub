@@ -1,0 +1,24 @@
+# Dependências
+node_modules/
+workhub-backend/node_modules/
+workhub-frontend/node_modules/
+
+# Ficheiros de build
+dist/
+build/
+
+# Variáveis de ambiente
+.env
+.env.local
+.env.production
+
+# Logs
+*.log
+npm-debug.log*
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# ZIPs
+*.zip
