@@ -1,0 +1,298 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+.reservation-page {
+    min-height: 100vh;
+    background-color: #f4f3ef;
+    padding: 40px 48px;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.reservation-card {
+    max-width: 560px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px 36px 36px;
+    border: 1px solid #e5e3dd;
+}
+
+/* ── Back button ── */
+
+.back-button {
+    background: none;
+    border: none;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    color: #888;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.15s;
+}
+
+.back-button:hover { color: #1a1a1a; }
+
+/* ── Header ── */
+
+.reservation-header { margin-bottom: 28px; }
+
+.reservation-header h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #1a1a1a;
+    letter-spacing: -0.4px;
+    margin-bottom: 6px;
+}
+
+.reservation-header p {
+    font-size: 14px;
+    color: #888;
+}
+
+/* ── Section label ── */
+
+.reservation-section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #aaa;
+    margin: 24px 0 12px;
+}
+
+.reservation-section-label:first-of-type { margin-top: 0; }
+
+/* ── Form ── */
+
+.reservation-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.field-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.field-group label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #444;
+    margin-bottom: 6px;
+}
+
+.field-group input,
+.field-group select,
+.field-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    color: #1a1a1a;
+    background: #fafaf8;
+    border: 1px solid #e5e3dd;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+    -webkit-appearance: none;
+}
+
+.field-group input::placeholder,
+.field-group textarea::placeholder { color: #c0bdb6; }
+
+.field-group input:hover,
+.field-group select:hover,
+.field-group textarea:hover { border-color: #ccc; }
+
+.field-group input:focus,
+.field-group select:focus,
+.field-group textarea:focus {
+    border-color: #1a1a1a;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.06);
+}
+
+.field-group input.field-error,
+.field-group select.field-error {
+    border-color: #e24b4a;
+    background: #fff8f8;
+}
+
+.field-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.error-msg {
+    font-size: 12px;
+    color: #e24b4a;
+    margin-top: 4px;
+}
+
+.field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* ── Serviços extras ── */
+
+.extras-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.extra-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    background: #fafaf8;
+    border: 1px solid #e5e3dd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    user-select: none;
+}
+
+.extra-item:hover {
+    border-color: #ccc;
+    background: #f4f3ef;
+}
+
+.extra-item.selected {
+    border-color: #1a1a1a;
+    background: #fff;
+}
+
+.extra-item-info { flex: 1; }
+
+.extra-item-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #1a1a1a;
+}
+
+.extra-item-desc {
+    font-size: 12px;
+    color: #888;
+    margin-top: 2px;
+}
+
+.extra-item-price {
+    font-size: 13px;
+    font-weight: 600;
+    color: #444;
+    margin-left: 12px;
+    flex-shrink: 0;
+}
+
+.extra-checkbox {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-left: 10px;
+    transition: border-color 0.15s, background 0.15s;
+}
+
+.extra-item.selected .extra-checkbox {
+    background: #1a1a1a;
+    border-color: #1a1a1a;
+}
+
+.extra-checkbox::after {
+    content: '';
+    width: 8px;
+    height: 5px;
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(-45deg) translateY(-1px);
+    display: none;
+}
+
+.extra-item.selected .extra-checkbox::after { display: block; }
+
+.extras-loading {
+    font-size: 13px;
+    color: #aaa;
+    padding: 4px 0;
+}
+
+/* ── Resumo do custo ── */
+
+.cost-summary {
+    background: #fafaf8;
+    border: 1px solid #e5e3dd;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 8px;
+}
+
+.cost-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 6px;
+}
+
+.cost-row:last-child { margin-bottom: 0; }
+
+.cost-row.total {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1a1a;
+    padding-top: 8px;
+    border-top: 1px solid #e5e3dd;
+    margin-top: 8px;
+}
+
+/* ── Botão ── */
+
+.reservation-btn {
+    width: 100%;
+    padding: 11px;
+    margin-top: 8px;
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+}
+
+.reservation-btn:hover:not(:disabled) { background: #333; }
+.reservation-btn:active:not(:disabled) { transform: scale(0.99); }
+.reservation-btn:disabled { cursor: not-allowed; opacity: 0.6; }
+
+.spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: inline-block;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }

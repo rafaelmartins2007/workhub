@@ -37,6 +37,8 @@ const Navbar = () => {
             });
     };
 
+    const isAdmin = user?.role === "admin";
+
     return (
         <nav className="navbar">
             <div className="navbar-container">
@@ -46,7 +48,17 @@ const Navbar = () => {
 
                 <div className="navbar-links">
                     <Link to="/spaces">Catálogo de Espaços</Link>
-                    {user && <Link to="/reservations/my">Minhas Reservas</Link>}
+                    {user && !isAdmin && (
+                        <Link to="/reservations/my">Minhas Reservas</Link>
+                    )}
+                    {isAdmin && (
+                        <>
+                            <Link to="/admin/spaces">Espaços</Link>
+                            <Link to="/admin/reservations">Reservas</Link>
+                            <Link to="/admin/users">Utilizadores</Link>
+                            <Link to="/admin/services">Serviços</Link>
+                        </>
+                    )}
                 </div>
 
                 <div className="navbar-right">

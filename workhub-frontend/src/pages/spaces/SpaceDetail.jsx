@@ -3,6 +3,13 @@ import { useParams, useNavigate } from "react-router-dom";
 import config from "../../config";
 import "./SpaceDetail.css";
 
+const TIPO_LABELS = {
+    secretaria_partilhada: "Secretária Partilhada",
+    sala_reuniao: "Sala de Reunião",
+    gabinete_privado: "Gabinete Privado",
+    auditorio: "Auditório / Eventos",
+};
+
 const SpaceDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -34,11 +41,12 @@ const SpaceDetail = () => {
     return (
         <div className="space-detail-page">
             <div className="detail-container">
+
                 <button className="back-button" onClick={() => navigate("/spaces")}>
                     ← Voltar ao Catálogo
                 </button>
 
-                <h1>{space.tipo}</h1>
+                <h1>{TIPO_LABELS[space.tipo] || space.tipo}</h1>
                 <p className="detail-description">{space.descricao}</p>
 
                 <div className="detail-info">
@@ -48,7 +56,7 @@ const SpaceDetail = () => {
                     </div>
                     <div className="info-item">
                         <strong>Preço por dia</strong>
-                        {space.precoDia || "—"}€
+                        {space.precoDia ? `${space.precoDia}€` : "—"}
                     </div>
                     <div className="info-item">
                         <strong>Capacidade</strong>
@@ -67,9 +75,10 @@ const SpaceDetail = () => {
                     </div>
                 )}
 
-                <button className="btn-reservar">
+                <button className="btn-reservar" onClick={() => navigate(`/spaces/${id}/reserve`)}>
                     Fazer Reserva
                 </button>
+
             </div>
         </div>
     );
