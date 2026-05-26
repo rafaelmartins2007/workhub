@@ -300,3 +300,49 @@
 }
 
 @keyframes spin { to { transform: rotate(360deg); } }
+/* ── Search group (input + botão unidos) ── */
+
+.search-group {
+    display: flex;
+    align-items: center;
+}
+
+.search-group input {
+    width: 260px;
+    padding: 9px 12px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    color: #1a1a1a;
+    background: #fff;
+    border: 1px solid #e5e3dd;
+    border-right: none;
+    border-radius: 8px 0 0 8px;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    height: 38px;
+}
+
+.search-group input::placeholder { color: #c0bdb6; }
+.search-group input:hover { border-color: #ccc; }
+.search-group input:focus {
+    border-color: #1a1a1a;
+    box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.06);
+    z-index: 1;
+}
+
+.btn-search {
+    padding: 0 14px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    color: #fff;
+    background: #1a1a1a;
+    border: 1px solid #1a1a1a;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s;
+    height: 38px;
+}
+
+.btn-search:hover { background: #333; border-color: #333; }

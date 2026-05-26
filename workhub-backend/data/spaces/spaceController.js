@@ -9,32 +9,53 @@ function SpaceController(SpaceModel) {
         removeById
     };
 
-    // Lista espaços ativos com paginação, pesquisa por tipo e ordenação.
+    // Lista espaços com paginação, pesquisa, filtros e ordenação.
     function findAll(req) {
         return new Promise((resolve, reject) => {
-            const page = parseInt(req.query.page) || 1;
-            const limit = parseInt(req.query.limit) || 10;
-            const search = req.query.search || "";
+            const page       = parseInt(req.query.page)  || 1;
+            const limit      = parseInt(req.query.limit) || 10;
+            const search     = req.query.search     || "";
+            const tipo       = req.query.tipo       || "";
+            const capacidade = req.query.capacidade || "";
+            const sortBy     = req.query.sortBy     || "";   // precoHora | capacidade | createdAt
+            const order      = req.query.order      || "asc"; // asc | desc
 
             const skip = (page - 1) * limit;
 
             let query = {};
 
-            // === LÓGICA IMPORTANTE: Admin vê tudo, cliente vê só ativos ===
+            // Admin vê tudo, cliente vê só ativos
             const isAdmin = req.user && req.user.role === 'admin';
-
             if (!isAdmin) {
                 query.ativo = true;
             }
 
+            // Pesquisa por tipo ou descrição
             if (search) {
                 query.$or = [
-                    { tipo: { $regex: search, $options: 'i' } },
-                    { descricao: { $regex: search, $options: 'i' } }
+                    { tipo:     { $regex: search, $options: 'i' } },
+                    { descricao:{ $regex: search, $options: 'i' } }
                 ];
             }
 
+            // Filtro por tipo exacto
+            if (tipo) {
+                query.tipo = tipo;
+            }
+
+            // Filtro por capacidade mínima
+            if (capacidade) {
+                query.capacidade = { $gte: parseInt(capacidade) };
+            }
+
+            // Ordenação — campos permitidos: precoHora, capacidade, createdAt
+            const sortFields = ["precoHora", "capacidade", "createdAt"];
+            const sortField  = sortFields.includes(sortBy) ? sortBy : null;
+            const sortOrder  = order === "desc" ? -1 : 1;
+            const sortObj    = sortField ? { [sortField]: sortOrder } : {};
+
             SpaceModel.find(query)
+                .sort(sortObj)
                 .skip(skip)
                 .limit(limit)
                 .then(spaces => {
@@ -56,26 +77,23 @@ function SpaceController(SpaceModel) {
         });
     }
 
-    // Procura um espaço pelo id — só devolve se estiver ativo.
+    // Procura um espaço pelo id
     function findById(id) {
         return new Promise((resolve, reject) => {
-            SpaceModel.findOne({ _id: id, ativo: true })
+            SpaceModel.findById(id)
                 .then(space => {
-                    if (!space) return reject(new Error("Espaço não encontrado ou inativo"));
+                    if (!space) return reject(new Error("Espaço não encontrado"));
                     resolve(space);
                 })
                 .catch(err => reject(err));
         });
     }
 
-
-    // Cria um novo espaço — values vem diretamente do req.body
     function create(values) {
-        let newSpace = SpaceModel(values); // instancia o modelo com os valores
-        return newSpace.save();   // persiste na BD e devolve o documento criado
+        let newSpace = SpaceModel(values);
+        return newSpace.save();
     }
 
-    // Atualiza os campos de um espaço existente pelo _id
     function update(id, space) {
         return new Promise((resolve, reject) => {
             SpaceModel.findByIdAndUpdate(id, space, { new: true })
@@ -84,7 +102,6 @@ function SpaceController(SpaceModel) {
         });
     }
 
-    // Remove permanentemente o espaço pelo _id
     function removeById(id) {
         return new Promise((resolve, reject) => {
             SpaceModel.findByIdAndDelete(id)
