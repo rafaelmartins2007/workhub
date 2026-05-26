@@ -20,9 +20,13 @@ router.post('/auth/reset-password',  authController.resetPassword);
 router.use('/spaces', spaceRoutes);
 
 // ====================== ROTAS PROTEGIDAS (requerem login) ======================
-router.use(verifyToken);
-
 router.get('/auth/logout', authController.logout);
+
+// ====================== ROTAS DE SERVIÇOS EXTRAS (GET público) ======================
+router.use('/extra-services', extraServiceRoutes);
+
+// ====================== ROTAS PROTEGIDAS ======================
+router.use(verifyToken);
 
 // ====================== ROTAS DE UTILIZADORES ======================
 router.use('/users', userRoutes);

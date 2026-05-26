@@ -8,9 +8,9 @@ import "./admin.css";
 
 const TIPOS = [
     { value: "secretaria_partilhada", label: "Secretária Partilhada" },
-    { value: "sala_reuniao",          label: "Sala de Reunião" },
-    { value: "gabinete_privado",      label: "Gabinete Privado" },
-    { value: "auditorio",             label: "Auditório / Eventos" },
+    { value: "sala_reuniao", label: "Sala de Reunião" },
+    { value: "gabinete_privado", label: "Gabinete Privado" },
+    { value: "auditorio", label: "Auditório / Eventos" },
 ];
 
 const PAGE_SIZE = 10;
@@ -78,7 +78,7 @@ const AdminSpaces = () => {
                         className="btn-action"
                         onClick={() => toggleAtivo(record)}
                     >
-                        {record.ativo ? "Desativar" : "Ativar"} 
+                        {record.ativo ? "Desativar" : "Ativar"}
                     </button>
                     <button
                         className="btn-action danger"
@@ -96,8 +96,11 @@ const AdminSpaces = () => {
         setLoading(true);
         const query = qs.stringify({ page, limit: PAGE_SIZE, search: searchTerm || undefined });
 
-        fetch(`${config.API_BASE}/spaces?${query}`, {
-            headers: { Accept: "application/json" },
+        fetch(`${config.API_BASE}/spaces/admin?${query}`, {
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${token}`,
+            },
         })
             .then((res) => res.json())
             .then((response) => {
@@ -130,11 +133,11 @@ const AdminSpaces = () => {
     const openEdit = (space) => {
         setEditingSpace(space);
         reset({
-            tipo:        space.tipo,
-            descricao:   space.descricao,
-            capacidade:  space.capacidade,
-            precoHora:   space.precoHora,
-            precoDia:    space.precoDia || "",
+            tipo: space.tipo,
+            descricao: space.descricao,
+            capacidade: space.capacidade,
+            precoHora: space.precoHora,
+            precoDia: space.precoDia || "",
             equipamentos: space.equipamentos?.join(", ") || "",
         });
         setPanelOpen(true);
@@ -147,18 +150,18 @@ const AdminSpaces = () => {
         setSaving(true);
 
         const body = {
-            tipo:        formData.tipo,
-            descricao:   formData.descricao,
-            capacidade:  parseInt(formData.capacidade),
-            precoHora:   parseFloat(formData.precoHora),
-            precoDia:    formData.precoDia ? parseFloat(formData.precoDia) : undefined,
+            tipo: formData.tipo,
+            descricao: formData.descricao,
+            capacidade: parseInt(formData.capacidade),
+            precoHora: parseFloat(formData.precoHora),
+            precoDia: formData.precoDia ? parseFloat(formData.precoDia) : undefined,
             // equipamentos: campo de texto separado por vírgulas → array
             equipamentos: formData.equipamentos
                 ? formData.equipamentos.split(",").map((e) => e.trim()).filter(Boolean)
                 : [],
         };
 
-        const url    = editingSpace
+        const url = editingSpace
             ? `${config.API_BASE}/spaces/${editingSpace._id}`
             : `${config.API_BASE}/spaces`;
         const method = editingSpace ? "PUT" : "POST";

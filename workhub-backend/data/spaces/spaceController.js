@@ -15,53 +15,29 @@ function SpaceController(SpaceModel) {
             const page = parseInt(req.query.page) || 1;
             const limit = parseInt(req.query.limit) || 10;
             const search = req.query.search || "";
-            const capacidade = parseInt(req.query.capacidade);  // pode ser NaN se não enviado
 
-            const skip = (page - 1) * limit;  // quantos objetos tem de saltar para chegar à proxima pagina ex page 2 -> 
-            //                                                 skip 10 objetos (page 1) e mostrar os proximos 10 (limit)
+            const skip = (page - 1) * limit;
 
-            // Filtro base: só espaços ativos
-            let query = { ativo: true };
+            let query = {};
+
+            // === LÓGICA IMPORTANTE: Admin vê tudo, cliente vê só ativos ===
+            const isAdmin = req.user && req.user.role === 'admin';
+
+            if (!isAdmin) {
+                query.ativo = true;
+            }
 
             if (search) {
-                query.tipo = { $regex: search, $options: 'i' }; // pesquisa case-insensitive no campo tipo
-
-            }
-            if (capacidade) {
-                query.capacidade = capacidade;
-            }
-
-            // ====================== ORDENACAO ======================
-
-            // Ordenação — por omissão: preço ascendente (mais barato primeiro)
-            let sortOption = { precoHora: 1 }; // default: mais barato primeiro
-
-            const sortBy = req.query.sort || 'preco';
-            const order = req.query.order === 'desc' ? -1 : 1; // 1 = asc, -1 = desc
-
-            switch (sortBy.toLowerCase()) {
-                case 'preco':
-                case 'precohora':
-                    sortOption = { precoHora: order };
-                    break;
-                case 'capacidade':
-                    sortOption = { capacidade: order };
-                    break;
-                case 'popularidade':
-                    
-                    sortOption = { precoHora: order }; 
-                    break;
-                default:
-                    sortOption = { precoHora: order };
+                query.$or = [
+                    { tipo: { $regex: search, $options: 'i' } },
+                    { descricao: { $regex: search, $options: 'i' } }
+                ];
             }
 
-            // Executar a query com paginação e ordenação
             SpaceModel.find(query)
-                .skip(skip)    
-                .limit(limit)  
-                .sort(sortOption)
+                .skip(skip)
+                .limit(limit)
                 .then(spaces => {
-                    // Contar o total de documentos (para calcular totalPages)
                     SpaceModel.countDocuments(query)
                         .then(total => {
                             resolve({
@@ -70,9 +46,8 @@ function SpaceController(SpaceModel) {
                                     total,
                                     page,
                                     limit,
-                                    totalPages: Math.ceil(total / limit)  // arredondar para cima
-                                },
-                                sort: { field: sortBy, order: order === 1 ? 'asc' : 'desc' }
+                                    totalPages: Math.ceil(total / limit)
+                                }
                             });
                         })
                         .catch(err => reject(err));
@@ -84,7 +59,7 @@ function SpaceController(SpaceModel) {
     // Procura um espaço pelo id — só devolve se estiver ativo.
     function findById(id) {
         return new Promise((resolve, reject) => {
-            SpaceModel.findOne({ _id: id, ativo: true })  
+            SpaceModel.findOne({ _id: id, ativo: true })
                 .then(space => {
                     if (!space) return reject(new Error("Espaço não encontrado ou inativo"));
                     resolve(space);
@@ -94,7 +69,7 @@ function SpaceController(SpaceModel) {
     }
 
 
-     // Cria um novo espaço — values vem diretamente do req.body
+    // Cria um novo espaço — values vem diretamente do req.body
     function create(values) {
         let newSpace = SpaceModel(values); // instancia o modelo com os valores
         return newSpace.save();   // persiste na BD e devolve o documento criado
@@ -108,7 +83,7 @@ function SpaceController(SpaceModel) {
                 .catch(err => reject(err));
         });
     }
-    
+
     // Remove permanentemente o espaço pelo _id
     function removeById(id) {
         return new Promise((resolve, reject) => {
