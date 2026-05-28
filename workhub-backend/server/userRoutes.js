@@ -48,6 +48,41 @@ router.put('/me', verifyToken, (req, res) => {
         });
 });
 
+// Ver os próprios favoritos
+router.get('/me/favorites', verifyToken, (req, res) => {
+    User.findById(req.user.id).populate('favoritos')
+        .then((user) => {
+            res.json(user.favoritos);
+        })
+        .catch((err) => {
+            res.status(500).json({ message: "Erro ao carregar favoritos", error: err.message });
+        });
+});
+
+// Adicionar/Remover favorito
+router.post('/me/favorites/:spaceId', verifyToken, (req, res) => {
+    User.findById(req.user.id)
+        .then((user) => {
+            if (!user) return res.status(404).json({ message: "Utilizador não encontrado" });
+            const spaceId = req.params.spaceId;
+            const index = user.favoritos.indexOf(spaceId);
+            if (index === -1) {
+                user.favoritos.push(spaceId);
+                return user.save().then(() => {
+                    res.json({ message: "Espaço adicionado aos favoritos com sucesso" });
+                });
+            } else {
+                user.favoritos.splice(index, 1);
+                return user.save().then(() => {
+                    res.json({ message: "Espaço removido dos favoritos com sucesso" });
+                }); 
+            }
+        })
+        .catch((err) => {
+            res.status(500).json({ message: "Erro ao atualizar favoritos", error: err.message });
+        });
+});
+
 // ====================== ROTAS DO ADMIN ======================
 
 // Listar todos os utilizadores

@@ -14,6 +14,7 @@ let UserSchema = new mongoose.Schema({
     password:  { type: String, required: true },
     role:      { type: String, enum: ["client", "admin"], default: "client" },
     ativo:     { type: Boolean, default: true },
+    favoritos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Space" }],
 
     // Campos para recuperação de password:
     resetPasswordToken:   { type: String, default: null }, // token aleatório gerado por crypto
