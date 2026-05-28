@@ -31,7 +31,7 @@ function ReservationController(ReservationModel) {
                 }
 
                 const newStartMin = timeToMinutes(horaInicio);
-                const newEndMin = newStartMin + (duracao * 60);
+                const newEndMin   = newStartMin + (duracao * 60);
 
                 const existingReservations = await ReservationModel.find({
                     space: space,
@@ -41,7 +41,7 @@ function ReservationController(ReservationModel) {
 
                 for (let res of existingReservations) {
                     const existingStartMin = timeToMinutes(res.horaInicio);
-                    const existingEndMin = existingStartMin + (res.duracao * 60);
+                    const existingEndMin   = existingStartMin + (res.duracao * 60);
 
                     if (hasTimeOverlap(newStartMin, newEndMin, existingStartMin, existingEndMin)) {
                         return reject({
@@ -61,7 +61,7 @@ function ReservationController(ReservationModel) {
         });
     }
 
-    // ====================== FIND ALL (ADMIN) ======================
+    // ====================== FIND ALL (Admin) ======================
     function findAll(req) {
         return new Promise((resolve, reject) => {
             const page = parseInt(req.query.page) || 1;
@@ -70,6 +70,7 @@ function ReservationController(ReservationModel) {
             const capacidade = parseInt(req.query.capacidade);
             const dataInicio = req.query.dataInicio;
             const dataFim = req.query.dataFim;
+            const estado = req.query.status || req.query.estado;   // ← Suporta o filtro do frontend
 
             const skip = (page - 1) * limit;
 
@@ -81,7 +82,12 @@ function ReservationController(ReservationModel) {
             if (dataInicio || dataFim) {
                 query.data = {};
                 if (dataInicio) query.data.$gte = new Date(dataInicio + "T00:00:00");
-                if (dataFim) query.data.$lte = new Date(dataFim + "T23:59:59.999Z");
+                if (dataFim)    query.data.$lte = new Date(dataFim + "T23:59:59.999Z");
+            }
+
+            // Filtro de estado - CORRIGIDO
+            if (estado) {
+                query.estado = estado;
             }
 
             let sortOption = { data: 1, horaInicio: 1 };
@@ -95,7 +101,7 @@ function ReservationController(ReservationModel) {
             ReservationModel.find(query)
                 .populate('user')
                 .populate('space')
-                .populate('servicosExtras')           // ← Adicionado
+                .populate('servicosExtras')
                 .skip(skip)
                 .limit(limit)
                 .sort(sortOption)
@@ -140,10 +146,11 @@ function ReservationController(ReservationModel) {
             if (dataInicio || dataFim) {
                 query.data = {};
                 if (dataInicio) query.data.$gte = new Date(dataInicio + "T00:00:00");
-                if (dataFim) query.data.$lte = new Date(dataFim + "T23:59:59.999Z");
+                if (dataFim)    query.data.$lte = new Date(dataFim + "T23:59:59.999Z");
             }
 
             let sortOption = { data: 1, horaInicio: 1 };
+
             const sortBy = req.query.sort || 'data';
             const order = req.query.order === 'desc' ? -1 : 1;
 
@@ -153,7 +160,7 @@ function ReservationController(ReservationModel) {
 
             ReservationModel.find(query)
                 .populate('space')
-                .populate('servicosExtras')           // ← Adicionado
+                .populate('servicosExtras')
                 .skip(skip)
                 .limit(limit)
                 .sort(sortOption)
@@ -183,7 +190,7 @@ function ReservationController(ReservationModel) {
             ReservationModel.findByIdAndUpdate(id, reservation, { new: true })
                 .populate('user')
                 .populate('space')
-                .populate('servicosExtras')           // ← Adicionado
+                .populate('servicosExtras')
                 .then(updated => resolve(updated))
                 .catch(err => reject(err));
         });

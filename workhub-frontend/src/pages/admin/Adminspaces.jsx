@@ -21,10 +21,11 @@ const AdminSpaces = () => {
     const [saving, setSaving]         = useState(false);
 
     const [search, setSearch] = useState("");
+    const [tipo, setTipo]     = useState("");        // ← Adicionado
     const [sortBy, setSortBy] = useState("");
     const [order, setOrder]   = useState("asc");
 
-    const filtersRef = useRef({ search: "", sortBy: "", order: "asc" });
+    const filtersRef = useRef({ search: "", tipo: "", sortBy: "", order: "asc" });
 
     const [panelOpen, setPanelOpen]       = useState(false);
     const [editingSpace, setEditingSpace] = useState(null);
@@ -90,6 +91,7 @@ const AdminSpaces = () => {
             page,
             limit:  PAGE_SIZE,
             search: filters.search || undefined,
+            tipo:   filters.tipo   || undefined,     // ← Adicionado
             sortBy: filters.sortBy || undefined,
             order:  filters.order  || undefined,
         });
@@ -123,7 +125,16 @@ const AdminSpaces = () => {
     const handleSearch = (e) => {
         const val = e.target.value;
         setSearch(val);
-        const filters = { search: val, sortBy, order };
+        const filters = { search: val, tipo, sortBy, order };
+        filtersRef.current = filters;
+        fetchSpaces(1, filters);
+    };
+
+    // ← Novo handler para o filtro de Tipo
+    const handleTipo = (e) => {
+        const val = e.target.value;
+        setTipo(val);
+        const filters = { search, tipo: val, sortBy, order };
         filtersRef.current = filters;
         fetchSpaces(1, filters);
     };
@@ -131,7 +142,7 @@ const AdminSpaces = () => {
     const handleSortBy = (e) => {
         const val = e.target.value;
         setSortBy(val);
-        const filters = { search, sortBy: val, order };
+        const filters = { search, tipo, sortBy: val, order };
         filtersRef.current = filters;
         fetchSpaces(1, filters);
     };
@@ -139,7 +150,7 @@ const AdminSpaces = () => {
     const handleOrder = (e) => {
         const val = e.target.value;
         setOrder(val);
-        const filters = { search, sortBy, order: val };
+        const filters = { search, tipo, sortBy, order: val };
         filtersRef.current = filters;
         fetchSpaces(1, filters);
     };
@@ -239,6 +250,14 @@ const AdminSpaces = () => {
                     value={search}
                     onChange={handleSearch}
                 />
+
+                {/* Filtro de Tipo - Adicionado para ficar igual ao catálogo */}
+                <select value={tipo} onChange={handleTipo}>
+                    <option value="">Todos os tipos</option>
+                    {TIPOS.map((t) => (
+                        <option key={t.value} value={t.value}>{t.label}</option>
+                    ))}
+                </select>
 
                 <select value={sortBy} onChange={handleSortBy}>
                     <option value="">Ordenar por...</option>
