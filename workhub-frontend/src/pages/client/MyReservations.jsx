@@ -8,27 +8,28 @@ import "./MyReservations.css";
 const PAGE_SIZE = 10;
 
 const STATUS_LABELS = {
-    Pendente:   { label: "Pendente",   className: "status pendente"   },
+    Pendente: { label: "Pendente", className: "status pendente" },
     Confirmada: { label: "Confirmada", className: "status confirmada" },
-    Cancelada:  { label: "Cancelada",  className: "status cancelada"  },
-    Concluida:  { label: "Concluída",  className: "status concluida"  },
+    Cancelada: { label: "Cancelada", className: "status cancelada" },
+    Concluida: { label: "Concluída", className: "status concluida" },
 };
 
 const TIPO_LABELS = {
     secretaria_partilhada: "Secretária Partilhada",
-    sala_reuniao:          "Sala de Reunião",
-    gabinete_privado:      "Gabinete Privado",
-    auditorio:             "Auditório / Eventos",
+    sala_reuniao: "Sala de Reunião",
+    gabinete_privado: "Gabinete Privado",
+    auditorio: "Auditório / Eventos",
 };
 
 const MyReservations = () => {
     const navigate = useNavigate();
-    const [loading, setLoading]           = useState(true);
-    const [reservations, setReservations] = useState([]);
-    const [pagination, setPagination]     = useState({ current: 1, pageSize: PAGE_SIZE, total: 0 });
-    const [filtroEstado, setFiltroEstado] = useState("");
-
     const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    const isAdmin = user?.role === "admin";
+    const [loading, setLoading] = useState(true);
+    const [reservations, setReservations] = useState([]);
+    const [pagination, setPagination] = useState({ current: 1, pageSize: PAGE_SIZE, total: 0 });
+    const [filtroEstado, setFiltroEstado] = useState("");
 
     // Data de hoje no formato YYYY-MM-DD
     const hoje = new Date().toISOString().split("T")[0];
@@ -80,16 +81,16 @@ const MyReservations = () => {
 
         const query = qs.stringify({
             page,
-            limit:      PAGE_SIZE,
+            limit: PAGE_SIZE,
             dataInicio: hoje,
-            status:     estado || undefined,
-            sort:       "data",
-            order:      "asc",
+            status: estado || undefined,
+            sort: "data",
+            order: "asc",
         });
 
         fetch(`${config.API_BASE}/reservations/my?${query}`, {
             headers: {
-                Accept:        "application/json",
+                Accept: "application/json",
                 Authorization: `Bearer ${token}`,
             },
         })
@@ -123,7 +124,7 @@ const MyReservations = () => {
                     <h1>Minhas Reservas</h1>
                     <p>Reservas de hoje em diante</p>
                 </div>
-                <button className="btn-historico" onClick={() => navigate("/reservations/history")}>
+                <button className="btn-historico" onClick={() => navigate(isAdmin ? "/admin/history" : "/reservations/history")}>
                     Ver Histórico
                 </button>
             </div>

@@ -14,7 +14,7 @@ const Navbar = () => {
         setUser(storedUser ? JSON.parse(storedUser) : null);
     }, [location]);
 
-    const handleLogout = () => {
+    const handleLogout = () => {    
         const token = localStorage.getItem("token");
 
         fetch(`${config.API_BASE}/auth/logout`, {
@@ -61,6 +61,7 @@ const Navbar = () => {
                     {isAdmin && (
                         <>
                             <Link to="/admin/spaces">Espaços</Link>
+                            <Link to="/admin/my-reservations">Minhas Reservas</Link>
                             <Link to="/admin/reservations">Reservas</Link>
                             <Link to="/admin/users">Utilizadores</Link>
                             <Link to="/admin/services">Serviços</Link>

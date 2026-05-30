@@ -18,7 +18,11 @@ let ReservationSchema = new mongoose.Schema({
     observacoesInternas: {type: String, default: ""},    // notas internas do admin (não visíveis ao cliente)
 
     // Array de referências aos serviços extras selecionados
-    servicosExtras: [{ type: mongoose.Schema.Types.ObjectId, ref: "ExtraService" }]
+    servicosExtras: [{ type: mongoose.Schema.Types.ObjectId, ref: "ExtraService" }],
+
+    // Preço total calculado no momento da criação da reserva:
+    // (precoHora do espaço × duração em horas) + soma dos preços dos serviços extras
+    precoTotal: { type: Number, default: 0 }
 }, { timestamps: true });
 
 let Reservation = mongoose.model("Reservation", ReservationSchema);

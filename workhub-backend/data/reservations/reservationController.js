@@ -24,9 +24,9 @@ function ReservationController(ReservationModel) {
     function create(values) {
         return new Promise(async (resolve, reject) => {
             try {
-                const { space, data, horaInicio, duracao } = values;
+                const { space: spaceId, data, horaInicio, duracao } = values;
 
-                if (!space || !data || !horaInicio || !duracao) {
+                if (!spaceId || !data || !horaInicio || !duracao) {
                     return reject(new Error("Faltam dados obrigatórios para criar a reserva"));
                 }
 
@@ -34,7 +34,7 @@ function ReservationController(ReservationModel) {
                 const newEndMin = newStartMin + (duracao * 60);
 
                 const existingReservations = await ReservationModel.find({
-                    space: space,
+                    space: spaceId,
                     data: data,
                     estado: { $in: ["Pendente", "Confirmada", "Concluida"] }
                 });
@@ -51,7 +51,33 @@ function ReservationController(ReservationModel) {
                     }
                 }
 
-                const newReservation = new ReservationModel(values);
+                // ====================== CÁLCULO DO PREÇO TOTAL ======================
+                // Carrega os modelos aqui (lazy) para garantir que já estão registados
+                const Space = mongoose.model("Space");
+                const ExtraService = mongoose.model("ExtraService");
+
+                // 1. Buscar o espaço para obter o precoHora
+                const space = await Space.findById(spaceId);
+                if (!space) {
+                    return reject(new Error("Espaço não encontrado"));
+                }
+
+                const precoEspaco = space.precoHora * duracao;
+
+                // 2. Somar os preços dos serviços extras (se existirem)
+                let precoServicos = 0;
+                if (values.servicosExtras && values.servicosExtras.length > 0) {
+                    const extras = await ExtraService.find({
+                        _id: { $in: values.servicosExtras },
+                        disponivel: true
+                    });
+                    precoServicos = extras.reduce((sum, s) => sum + s.preco, 0);
+                }
+
+                const precoTotal = precoEspaco + precoServicos;
+                // =====================================================================
+
+                const newReservation = new ReservationModel({ ...values, precoTotal });
                 const saved = await newReservation.save();
                 resolve(saved);
 

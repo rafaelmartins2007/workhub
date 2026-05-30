@@ -8,23 +8,23 @@ const PAGE_SIZE = 10;
 
 const TIPO_LABELS = {
     secretaria_partilhada: "Secretária Partilhada",
-    sala_reuniao:          "Sala de Reunião",
-    gabinete_privado:      "Gabinete Privado",
-    auditorio:             "Auditório / Eventos",
+    sala_reuniao: "Sala de Reunião",
+    gabinete_privado: "Gabinete Privado",
+    auditorio: "Auditório / Eventos",
 };
 
 const badgeClass = {
-    Pendente:   "badge badge-pendente",
+    Pendente: "badge badge-pendente",
     Confirmada: "badge badge-confirmada",
-    Cancelada:  "badge badge-cancelada",
-    Concluida:  "badge badge-concluida",
+    Cancelada: "badge badge-cancelada",
+    Concluida: "badge badge-concluida",
 };
 
 const AdminReports = () => {
     const [reservations, setReservations] = useState([]);
-    const [loading, setLoading]           = useState(true);
-    const [pagination, setPagination]     = useState({ current: 1, pageSize: PAGE_SIZE, total: 0 });
-    const [period, setPeriod]             = useState("6months");
+    const [loading, setLoading] = useState(true);
+    const [pagination, setPagination] = useState({ current: 1, pageSize: PAGE_SIZE, total: 0 });
+    const [period, setPeriod] = useState("6months");
 
     const filtersRef = useRef({ period: "6months" });
 
@@ -91,7 +91,7 @@ const AdminReports = () => {
 
         fetch(`${config.API_BASE}/reservations?${qs.stringify(params)}`, {
             headers: {
-                Accept:        "application/json",
+                Accept: "application/json",
                 Authorization: `Bearer ${token}`,
             },
         })

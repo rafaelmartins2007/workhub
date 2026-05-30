@@ -25,10 +25,10 @@ function App() {
             <main>
                 <Routes>
                     {/* ── Rotas públicas ── */}
-                    <Route path="/"           element={<Spaces />} />
-                    <Route path="/login"      element={<LoginForm />} />
-                    <Route path="/register"   element={<RegisterForm />} />
-                    <Route path="/spaces"     element={<Spaces />} />
+                    <Route path="/" element={<Spaces />} />
+                    <Route path="/login" element={<LoginForm />} />
+                    <Route path="/register" element={<RegisterForm />} />
+                    <Route path="/spaces" element={<Spaces />} />
                     <Route path="/spaces/:id" element={<SpaceDetail />} />
 
                     {/* ── Rotas do cliente (requerem login) ── */}
@@ -46,6 +46,9 @@ function App() {
                     } />
 
                     {/* ── Rotas do admin ── */}
+                    <Route path="/admin/my-reservations" element={
+                        <ProtectedRoute requireAdmin><MyReservations /></ProtectedRoute>
+                    } />
                     <Route path="/admin/spaces" element={
                         <ProtectedRoute requireAdmin><AdminSpaces /></ProtectedRoute>
                     } />
@@ -60,6 +63,9 @@ function App() {
                     } />
                     <Route path="/admin/reports" element={
                         <ProtectedRoute requireAdmin><AdminReports /></ProtectedRoute>
+                    } />
+                    <Route path="/admin/history" element={
+                        <ProtectedRoute requireAdmin><ReservationHistory /></ProtectedRoute>
                     } />
                 </Routes>
             </main>

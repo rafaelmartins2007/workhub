@@ -263,7 +263,6 @@ const AdminSpaces = () => {
                     <option value="">Ordenar por...</option>
                     <option value="precoHora">Preço</option>
                     <option value="capacidade">Capacidade</option>
-                    <option value="createdAt">Data de criação</option>
                 </select>
 
                 <select value={order} onChange={handleOrder}>
