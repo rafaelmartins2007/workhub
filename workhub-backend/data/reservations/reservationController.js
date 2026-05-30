@@ -31,7 +31,7 @@ function ReservationController(ReservationModel) {
                 }
 
                 const newStartMin = timeToMinutes(horaInicio);
-                const newEndMin   = newStartMin + (duracao * 60);
+                const newEndMin = newStartMin + (duracao * 60);
 
                 const existingReservations = await ReservationModel.find({
                     space: space,
@@ -41,7 +41,7 @@ function ReservationController(ReservationModel) {
 
                 for (let res of existingReservations) {
                     const existingStartMin = timeToMinutes(res.horaInicio);
-                    const existingEndMin   = existingStartMin + (res.duracao * 60);
+                    const existingEndMin = existingStartMin + (res.duracao * 60);
 
                     if (hasTimeOverlap(newStartMin, newEndMin, existingStartMin, existingEndMin)) {
                         return reject({
@@ -70,7 +70,7 @@ function ReservationController(ReservationModel) {
             const capacidade = parseInt(req.query.capacidade);
             const dataInicio = req.query.dataInicio;
             const dataFim = req.query.dataFim;
-            const estado = req.query.status || req.query.estado;   // ← Suporta o filtro do frontend
+            const estado = req.query.status || req.query.estado;
 
             const skip = (page - 1) * limit;
 
@@ -82,10 +82,9 @@ function ReservationController(ReservationModel) {
             if (dataInicio || dataFim) {
                 query.data = {};
                 if (dataInicio) query.data.$gte = new Date(dataInicio + "T00:00:00");
-                if (dataFim)    query.data.$lte = new Date(dataFim + "T23:59:59.999Z");
+                if (dataFim) query.data.$lte = new Date(dataFim + "T23:59:59.999Z");
             }
 
-            // Filtro de estado - CORRIGIDO
             if (estado) {
                 query.estado = estado;
             }
@@ -143,14 +142,14 @@ function ReservationController(ReservationModel) {
 
             if (search) query['space.tipo'] = { $regex: search, $options: 'i' };
             if (capacidade) query['space.capacidade'] = capacidade;
+
             if (dataInicio || dataFim) {
                 query.data = {};
                 if (dataInicio) query.data.$gte = new Date(dataInicio + "T00:00:00");
-                if (dataFim)    query.data.$lte = new Date(dataFim + "T23:59:59.999Z");
+                if (dataFim) query.data.$lte = new Date(dataFim + "T23:59:59.999Z");
             }
 
             let sortOption = { data: 1, horaInicio: 1 };
-
             const sortBy = req.query.sort || 'data';
             const order = req.query.order === 'desc' ? -1 : 1;
 

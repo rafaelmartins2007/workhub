@@ -48,15 +48,23 @@ const Navbar = () => {
 
                 <div className="navbar-links">
                     <Link to="/spaces">Catálogo de Espaços</Link>
+
+                    {/* Links do cliente */}
                     {user && !isAdmin && (
-                        <Link to="/reservations/my">Minhas Reservas</Link>
+                        <>
+                            <Link to="/reservations/my">Minhas Reservas</Link>
+                            <Link to="/reservations/history">Histórico</Link>
+                        </>
                     )}
+
+                    {/* Links do admin */}
                     {isAdmin && (
                         <>
                             <Link to="/admin/spaces">Espaços</Link>
                             <Link to="/admin/reservations">Reservas</Link>
                             <Link to="/admin/users">Utilizadores</Link>
                             <Link to="/admin/services">Serviços</Link>
+                            <Link to="/admin/reports">Relatórios</Link>
                         </>
                     )}
                 </div>

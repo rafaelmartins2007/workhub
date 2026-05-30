@@ -21,7 +21,7 @@ const TIPO_LABELS = {
     auditorio:             "Auditório / Eventos",
 };
 
-const MyReservations = () => {
+const ReservationHistory = () => {
     const navigate = useNavigate();
     const [loading, setLoading]           = useState(true);
     const [reservations, setReservations] = useState([]);
@@ -30,8 +30,10 @@ const MyReservations = () => {
 
     const token = localStorage.getItem("token");
 
-    // Data de hoje no formato YYYY-MM-DD
-    const hoje = new Date().toISOString().split("T")[0];
+    // Ontem no formato YYYY-MM-DD — dataFim=ontem para mostrar só reservas anteriores a hoje
+    const ontem = new Date();
+    ontem.setDate(ontem.getDate() - 1);
+    const dataFim = ontem.toISOString().split("T")[0];
 
     const columns = [
         {
@@ -64,6 +66,15 @@ const MyReservations = () => {
             render: (v) => v != null ? `${v}€` : "—",
         },
         {
+            title: "Serviços extras",
+            dataIndex: "servicosExtras",
+            key: "servicosExtras",
+            render: (extras) =>
+                extras && extras.length > 0
+                    ? extras.map((e) => e.nome || e).join(", ")
+                    : "—",
+        },
+        {
             title: "Estado",
             dataIndex: "estado",
             key: "estado",
@@ -74,17 +85,17 @@ const MyReservations = () => {
         },
     ];
 
-    // dataInicio=hoje → só reservas de hoje para a frente
-    const fetchReservations = (page, estado) => {
+    // dataFim=ontem → só reservas anteriores a hoje
+    const fetchHistory = (page, estado) => {
         setLoading(true);
 
         const query = qs.stringify({
             page,
-            limit:      PAGE_SIZE,
-            dataInicio: hoje,
-            status:     estado || undefined,
-            sort:       "data",
-            order:      "asc",
+            limit:  PAGE_SIZE,
+            dataFim,
+            status: estado || undefined,
+            sort:   "data",
+            order:  "desc",
         });
 
         fetch(`${config.API_BASE}/reservations/my?${query}`, {
@@ -106,33 +117,33 @@ const MyReservations = () => {
             .catch(() => setLoading(false));
     };
 
-    useEffect(() => { fetchReservations(1, ""); }, []);
+    useEffect(() => { fetchHistory(1, ""); }, []);
 
-    const handleTableChange = (pag) => fetchReservations(pag.current, filtroEstado);
+    const handleTableChange = (pag) => fetchHistory(pag.current, filtroEstado);
 
     const handleFiltroEstado = (e) => {
         const val = e.target.value;
         setFiltroEstado(val);
-        fetchReservations(1, val);
+        fetchHistory(1, val);
     };
 
     return (
         <div className="reservations-page">
             <div className="reservations-header">
                 <div>
-                    <h1>Minhas Reservas</h1>
-                    <p>Reservas de hoje em diante</p>
+                    <h1>Histórico de Reservas</h1>
+                    <p>Reservas anteriores a hoje</p>
                 </div>
-                <button className="btn-historico" onClick={() => navigate("/reservations/history")}>
-                    Ver Histórico
+                <button className="btn-historico" onClick={() => navigate("/reservations/my")}>
+                    ← Voltar às Reservas
                 </button>
             </div>
 
             <div className="reservations-filters">
                 <select value={filtroEstado} onChange={handleFiltroEstado}>
                     <option value="">Todos os estados</option>
-                    <option value="Pendente">Pendente</option>
-                    <option value="Confirmada">Confirmada</option>
+                    <option value="Concluida">Concluída</option>
+                    <option value="Cancelada">Cancelada</option>
                 </select>
             </div>
 
@@ -148,4 +159,4 @@ const MyReservations = () => {
     );
 };
 
-export default MyReservations;
+export default ReservationHistory;
