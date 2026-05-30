@@ -10,37 +10,32 @@ const userRoutes = require('./userRoutes');
 const notificationRoutes = require('./notificationRoutes');
 
 
-// ====================== ROTAS PÚBLICAS ======================
+// ====================== ROTAS DE AUTENTICAÇÃO (Públicas) ======================
 router.post('/auth/register',        authController.register);
 router.post('/auth/login',           authController.login);
 router.post('/auth/forgot-password', authController.forgotPassword);
 router.post('/auth/reset-password',  authController.resetPassword);
 
-// ====================== ROTAS DOS ESPAÇOS (públicas) ======================
+// ====================== ROTAS DOS ESPAÇOS (Acesso público para visualização) ======================
 router.use('/spaces', spaceRoutes);
 
-// ====================== ROTAS PROTEGIDAS (requerem login) ======================
+// Rota de logout (requer que o cliente informe que quer sair)
 router.get('/auth/logout', authController.logout);
 
 // ====================== ROTAS DE SERVIÇOS EXTRAS (GET público) ======================
 router.use('/extra-services', extraServiceRoutes);
 
-// ====================== ROTAS PROTEGIDAS ======================
+// ====================== MIDDLEWARE DE PROTEÇÃO GLOBAL ======================
+// A partir deste ponto, todas as rotas declaradas em baixo exigem um token JWT válido
 router.use(verifyToken);
 
-// ====================== ROTAS DE UTILIZADORES ======================
+// ====================== ROTAS PROTEGIDAS (Sub-módulos) ======================
 router.use('/users', userRoutes);
-
-// ====================== ROTAS DAS RESERVAS ======================
 router.use('/reservations', reservationRoutes);
-
-// ====================== ROTAS DE SERVIÇOS EXTRAS ======================
 router.use('/extra-services', extraServiceRoutes);
-
-// ====================== ROTAS DE NOTIFICAÇÕES ======================
 router.use('/notifications', notificationRoutes);
 
-// ====================== ROTA DE PERFIL (teste) ======================
+// Rota auxiliar para testar se o token está a devolver o utilizador correto
 router.get('/profile', (req, res) => {
     res.json({ message: "Perfil carregado", user: req.user });
 });

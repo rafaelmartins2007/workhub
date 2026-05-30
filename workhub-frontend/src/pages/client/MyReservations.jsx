@@ -7,6 +7,7 @@ import "./MyReservations.css";
 
 const PAGE_SIZE = 10;
 
+// Configuração visual dos estados da reserva
 const STATUS_LABELS = {
     Pendente: { label: "Pendente", className: "status pendente" },
     Confirmada: { label: "Confirmada", className: "status confirmada" },
@@ -14,6 +15,7 @@ const STATUS_LABELS = {
     Concluida: { label: "Concluída", className: "status concluida" },
 };
 
+// Labels para os tipos de espaço
 const TIPO_LABELS = {
     secretaria_partilhada: "Secretária Partilhada",
     sala_reuniao: "Sala de Reunião",
@@ -34,6 +36,7 @@ const MyReservations = () => {
     // Data de hoje no formato YYYY-MM-DD
     const hoje = new Date().toISOString().split("T")[0];
 
+    // Definição das colunas da tabela de reservas do cliente
     const columns = [
         {
             title: "Espaço",
@@ -75,7 +78,7 @@ const MyReservations = () => {
         },
     ];
 
-    // dataInicio=hoje → só reservas de hoje para a frente
+    // Carrega apenas as reservas do utilizador logado que sejam de hoje em diante
     const fetchReservations = (page, estado) => {
         setLoading(true);
 
@@ -107,10 +110,13 @@ const MyReservations = () => {
             .catch(() => setLoading(false));
     };
 
+    // Vai buscar as reservas ativas do cliente ao carregar
     useEffect(() => { fetchReservations(1, ""); }, []);
 
+    // Lida com a paginação da tabela de reservas
     const handleTableChange = (pag) => fetchReservations(pag.current, filtroEstado);
 
+    // Filtra por estado (ex: apenas confirmadas)
     const handleFiltroEstado = (e) => {
         const val = e.target.value;
         setFiltroEstado(val);
@@ -124,6 +130,7 @@ const MyReservations = () => {
                     <h1>Minhas Reservas</h1>
                     <p>Reservas de hoje em diante</p>
                 </div>
+                {/* Botão para ver reservas antigas (Histórico) */}
                 <button className="btn-historico" onClick={() => navigate(isAdmin ? "/admin/history" : "/reservations/history")}>
                     Ver Histórico
                 </button>

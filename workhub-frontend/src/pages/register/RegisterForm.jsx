@@ -6,11 +6,13 @@ import config from "../../config";
 import "./RegisterForm.css";
 
 const RegisterForm = () => {
+    // Configuração do formulário e estados para carregamento e visibilidade da password
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
+    // Função chamada ao submeter o formulário para criar uma nova conta
     const onSubmit = async (data) => {
         setLoading(true);
         try {
@@ -168,6 +170,7 @@ const RegisterForm = () => {
                                 onClick={() => setShowPassword(v => !v)}
                                 aria-label={showPassword ? "Esconder password" : "Mostrar password"}
                             >
+                                {/* Alterna o texto do botão consoante o estado */}
                                 {showPassword ? "Ocultar" : "Mostrar"}
                             </button>
                         </div>

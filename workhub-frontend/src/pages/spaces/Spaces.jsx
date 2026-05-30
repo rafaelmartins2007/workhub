@@ -8,6 +8,7 @@ import { HeartOutlined, HeartFilled } from "@ant-design/icons";
 
 const PAGE_SIZE = 9;
 
+// Labels amigáveis para os tipos de espaços no catálogo
 const TIPO_LABELS = {
     secretaria_partilhada: "Secretária Partilhada",
     sala_reuniao: "Sala de Reunião",
@@ -18,6 +19,7 @@ const TIPO_LABELS = {
 const Spaces = () => {
     const navigate = useNavigate();
 
+    // Estados para listagem, paginação, filtros e favoritos
     const [loading, setLoading] = useState(true);
     const [spaces, setSpaces] = useState([]);
     const [pagination, setPagination] = useState({ current: 1, pageSize: PAGE_SIZE, total: 0 });
@@ -29,6 +31,7 @@ const Spaces = () => {
     const [favoritosIds, setFavoritosIds] = useState(new Set());
     const [soFavoritos, setSoFavoritos] = useState(false);
 
+    // Definição das colunas da tabela do catálogo
     const columns = [
         {
             title: "Tipo",
@@ -80,6 +83,7 @@ const Spaces = () => {
         },
     ];
 
+    // Procura os espaços públicos disponíveis
     const fetchSpaces = (page, filters) => {
         setLoading(true);
 
@@ -108,6 +112,7 @@ const Spaces = () => {
             .catch(() => setLoading(false));
     };
 
+    // Carrega a lista de IDs dos espaços favoritos do utilizador logado
     const fetchFavoritosIds = () => {
         const token = localStorage.getItem("token");
         if (!token) return;
@@ -126,16 +131,18 @@ const Spaces = () => {
             .catch(() => { });
     };
 
+    // Inicializa a página com os espaços e os favoritos do utilizador
     useEffect(() => {
         fetchSpaces(1, filtersRef.current);
         fetchFavoritosIds();
     }, []);
 
+    // Gere a paginação do catálogo
     const handleTableChange = (pag) => {
         fetchSpaces(pag.current, filtersRef.current);
     };
 
-    // onChange a cada tecla — igual ao padrão das aulas
+    // Handlers para os filtros de pesquisa e ordenação
     const handleSearch = (e) => {
         if (soFavoritos) return;
         const val = e.target.value;
@@ -172,6 +179,7 @@ const Spaces = () => {
         fetchSpaces(1, filters);
     };
 
+    // Adiciona ou remove um espaço dos favoritos do utilizador
     const toggleFavorito = (spaceId) => {
         const token = localStorage.getItem("token");
         if (!token) return;
@@ -193,6 +201,7 @@ const Spaces = () => {
             .catch(() => { });
     };
 
+    // Carrega apenas os favoritos do utilizador (ignora outros filtros)
     const fetchSoFavoritos  = () => {
         const token = localStorage.getItem("token");
         if (!token) return;
@@ -214,6 +223,7 @@ const Spaces = () => {
             .catch(() => setLoading(false));
     };
 
+    // Alterna entre ver o catálogo completo ou apenas os favoritos
     const handleToggleFavoritos = () => {
         const next = !soFavoritos;
         setSoFavoritos(next);

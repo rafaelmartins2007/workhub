@@ -9,6 +9,7 @@ import "./admin.css";
 const PAGE_SIZE = 10;
 
 const AdminServices = () => {
+    // Estados para dados, paginação, pesquisa e controlo do painel lateral
     const [services, setServices] = useState([]);
     const [loading, setLoading] = useState(true);
     const [pagination, setPagination] = useState({ current: 1, pageSize: PAGE_SIZE, total: 0 });
@@ -18,10 +19,12 @@ const AdminServices = () => {
     const [panelOpen, setPanelOpen] = useState(false);
     const [editingService, setEditingService] = useState(null);
 
+    // Configuração do formulário para criação/edição
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     const token = localStorage.getItem("token");
 
+    // Colunas da tabela de serviços extras (Café, Projetor, etc)
     const columns = [
         {
             title: "Nome",
@@ -75,7 +78,7 @@ const AdminServices = () => {
         },
     ];
 
-    // ── Fetch serviços ──
+    // Carrega os serviços da API com suporte a paginação e pesquisa
     const fetchServices = (page, searchTerm) => {
         setLoading(true);
         const query = qs.stringify({ page, limit: PAGE_SIZE, search: searchTerm || undefined });
@@ -99,21 +102,24 @@ const AdminServices = () => {
             .catch(() => setLoading(false));
     };
 
+    // Procura os serviços iniciais ao montar o componente
     useEffect(() => { fetchServices(1, ""); }, []);
 
+    // Lida com a troca de página na listagem de serviços
     const handleTableChange = (pag) => fetchServices(pag.current, search);
     const handleSearch = (e) => {
         setSearch(e.target.value);
         fetchServices(1, e.target.value);
     };
 
-    // ── Painel lateral ──
+    // Limpa o formulário e abre o painel para criar novo serviço
     const openCreate = () => {
         setEditingService(null);
         reset({});
         setPanelOpen(true);
     };
 
+    // Preenche o formulário e abre o painel para editar serviço existente
     const openEdit = (service) => {
         setEditingService(service);
         reset({
@@ -126,7 +132,7 @@ const AdminServices = () => {
 
     const closePanel = () => { setPanelOpen(false); setEditingService(null); };
 
-    // ── Submeter formulário ──
+    // Envia os dados para a API (POST para novo, PUT para editar)
     const onSubmit = (formData) => {
         setSaving(true);
 
@@ -163,7 +169,7 @@ const AdminServices = () => {
             .finally(() => setSaving(false));
     };
 
-    // ── Ativar / Desativar ──
+    // Alterna a disponibilidade do serviço (se aparece ou não para os clientes)
     const toggleDisponivel = (service) => {
         fetch(`${config.API_BASE}/extra-services/${service._id}`, {
             method: "PUT",
@@ -180,7 +186,7 @@ const AdminServices = () => {
             .catch(() => message.error("Erro ao alterar disponibilidade."));
     };
 
-    // ── Remover ──
+    // Remove permanentemente um serviço extra
     const handleDelete = (id) => {
         if (!window.confirm("Tens a certeza que queres remover este serviço?")) return;
 

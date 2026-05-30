@@ -5,6 +5,7 @@ import qs from "query-string";
 import config from "../../config";
 import "./Admin.css";
 
+// Opções de tipos de espaços disponíveis para o formulário
 const TIPOS = [
     { value: "secretaria_partilhada", label: "Secretária Partilhada" },
     { value: "sala_reuniao",          label: "Sala de Reunião" },
@@ -15,13 +16,15 @@ const TIPOS = [
 const PAGE_SIZE = 10;
 
 const AdminSpaces = () => {
+    // Estados para dados, carregamento e paginação
     const [spaces, setSpaces]         = useState([]);
     const [loading, setLoading]       = useState(true);
     const [pagination, setPagination] = useState({ current: 1, pageSize: PAGE_SIZE, total: 0 });
     const [saving, setSaving]         = useState(false);
 
+    // Estados dos filtros
     const [search, setSearch] = useState("");
-    const [tipo, setTipo]     = useState("");        // ← Adicionado
+    const [tipo, setTipo]     = useState("");
     const [sortBy, setSortBy] = useState("");
     const [order, setOrder]   = useState("asc");
 
@@ -33,6 +36,7 @@ const AdminSpaces = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const token = localStorage.getItem("token");
 
+    // Configuração das colunas da tabela de espaços
     const columns = [
         {
             title: "Tipo",
@@ -85,13 +89,14 @@ const AdminSpaces = () => {
         },
     ];
 
+    // Vai buscar os espaços à API com base nos filtros ativos
     const fetchSpaces = (page, filters) => {
         setLoading(true);
         const query = qs.stringify({
             page,
             limit:  PAGE_SIZE,
             search: filters.search || undefined,
-            tipo:   filters.tipo   || undefined,     // ← Adicionado
+            tipo:   filters.tipo   || undefined,
             sortBy: filters.sortBy || undefined,
             order:  filters.order  || undefined,
         });
@@ -115,13 +120,15 @@ const AdminSpaces = () => {
             .catch(() => setLoading(false));
     };
 
+    // Carrega a lista inicial de espaços ao abrir a página
     useEffect(() => { fetchSpaces(1, filtersRef.current); }, []);
 
+    // Gere a mudança de página na tabela de espaços
     const handleTableChange = (pag) => {
         fetchSpaces(pag.current, filtersRef.current);
     };
 
-    // onChange a cada tecla — padrão das aulas
+    // Manipuladores de filtros: atualizam o estado e disparam nova procura
     const handleSearch = (e) => {
         const val = e.target.value;
         setSearch(val);
@@ -130,7 +137,6 @@ const AdminSpaces = () => {
         fetchSpaces(1, filters);
     };
 
-    // ← Novo handler para o filtro de Tipo
     const handleTipo = (e) => {
         const val = e.target.value;
         setTipo(val);
@@ -155,8 +161,10 @@ const AdminSpaces = () => {
         fetchSpaces(1, filters);
     };
 
+    // Abre o formulário para criar um novo espaço
     const openCreate = () => { setEditingSpace(null); reset({}); setPanelOpen(true); };
 
+    // Abre o formulário para editar um espaço existente
     const openEdit = (space) => {
         setEditingSpace(space);
         reset({
@@ -172,6 +180,7 @@ const AdminSpaces = () => {
 
     const closePanel = () => { setPanelOpen(false); setEditingSpace(null); };
 
+    // Guarda os dados (POST para novo, PUT para edição)
     const onSubmit = (formData) => {
         setSaving(true);
         const body = {
@@ -207,6 +216,7 @@ const AdminSpaces = () => {
             .finally(() => setSaving(false));
     };
 
+    // Ativa ou desativa um espaço rapidamente
     const toggleAtivo = (space) => {
         fetch(`${config.API_BASE}/spaces/${space._id}`, {
             method: "PUT",
@@ -220,6 +230,7 @@ const AdminSpaces = () => {
             .catch(() => message.error("Erro ao alterar estado."));
     };
 
+    // Remove um espaço permanentemente
     const handleDelete = (id) => {
         if (!window.confirm("Tens a certeza que queres remover este espaço?")) return;
         fetch(`${config.API_BASE}/spaces/${id}`, {
@@ -243,6 +254,7 @@ const AdminSpaces = () => {
                 <button className="btn-primary" onClick={openCreate}>+ Novo Espaço</button>
             </div>
 
+            {/* Barra de filtros e pesquisa */}
             <div className="admin-filters">
                 <input
                     type="text"
@@ -251,7 +263,6 @@ const AdminSpaces = () => {
                     onChange={handleSearch}
                 />
 
-                {/* Filtro de Tipo - Adicionado para ficar igual ao catálogo */}
                 <select value={tipo} onChange={handleTipo}>
                     <option value="">Todos os tipos</option>
                     {TIPOS.map((t) => (
@@ -280,6 +291,7 @@ const AdminSpaces = () => {
                 onChange={handleTableChange}
             />
 
+            {/* Painel Lateral (Formulário) */}
             {panelOpen && (
                 <div className="admin-form-overlay" onClick={(e) => e.target === e.currentTarget && closePanel()}>
                     <div className="admin-form-panel">

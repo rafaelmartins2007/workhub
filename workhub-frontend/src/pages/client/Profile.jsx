@@ -4,12 +4,14 @@ import config from "../../config";
 import "./Profile.css";
 
 const Profile = () => {
+    // Estados de carregamento e dados do utilizador
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const [data, setData] = useState({
         user: null,
     });
 
+    // Procura os dados do perfil do utilizador logado
     const fetchProfile = () => {
         fetch(`${config.API_BASE}/users/me`, {
             headers: {
@@ -28,16 +30,19 @@ const Profile = () => {
             });
     };
 
+    // Carrega os dados do utilizador ao entrar na página de perfil
     useEffect(() => {
         fetchProfile();
     }, []);
 
+    // Atualiza o estado local quando o utilizador digita nos campos
     const handleChange = (e) => {
         setData((prev) => ({
             user: { ...prev.user, [e.target.name]: e.target.value },
         }));
     };
 
+    // Envia as alterações do perfil para o servidor
     const handleSubmit = (e) => {
         e.preventDefault();
         setSaving(true);

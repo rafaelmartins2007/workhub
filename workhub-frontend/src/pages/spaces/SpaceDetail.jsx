@@ -16,6 +16,7 @@ const SpaceDetail = () => {
     const [space, setSpace] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    // Vai buscar os detalhes de um espaço específico pelo ID
     const fetchSpace = (spaceId) => {
         fetch(`${config.API_BASE}/spaces/${spaceId}`, {
             headers: { Accept: "application/json" },
@@ -31,6 +32,7 @@ const SpaceDetail = () => {
             });
     };
 
+    // Recarrega os detalhes sempre que o ID na URL mudar
     useEffect(() => {
         fetchSpace(id);
     }, [id]);
@@ -41,6 +43,7 @@ const SpaceDetail = () => {
     return (
         <div className="space-detail-page">
             <div className="detail-container">
+                {/* Botão simples para regressar à lista */}
 
                 <button className="back-button" onClick={() => navigate("/spaces")}>
                     ← Voltar ao Catálogo
@@ -49,6 +52,7 @@ const SpaceDetail = () => {
                 <h1>{TIPO_LABELS[space.tipo] || space.tipo}</h1>
                 <p className="detail-description">{space.descricao}</p>
 
+                {/* Grelha de informações básicas */}
                 <div className="detail-info">
                     <div className="info-item">
                         <strong>Preço por hora</strong>
@@ -64,6 +68,7 @@ const SpaceDetail = () => {
                     </div>
                 </div>
 
+                {/* Lista de equipamentos, se existirem */}
                 {space.equipamentos && space.equipamentos.length > 0 && (
                     <div className="equipamentos">
                         <h3>Equipamentos incluídos</h3>
@@ -75,6 +80,7 @@ const SpaceDetail = () => {
                     </div>
                 )}
 
+                {/* Botão para avançar para o formulário de reserva */}
                 <button className="btn-reservar" onClick={() => navigate(`/spaces/${id}/reserve`)}>
                     Fazer Reserva
                 </button>

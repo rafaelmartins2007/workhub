@@ -13,6 +13,7 @@ const TIPO_LABELS = {
     auditorio: "Auditório / Eventos",
 };
 
+// Classes CSS para os estados
 const badgeClass = {
     Pendente: "badge badge-pendente",
     Confirmada: "badge badge-confirmada",
@@ -21,6 +22,7 @@ const badgeClass = {
 };
 
 const AdminReports = () => {
+    // Estados para listagem e o período selecionado
     const [reservations, setReservations] = useState([]);
     const [loading, setLoading] = useState(true);
     const [pagination, setPagination] = useState({ current: 1, pageSize: PAGE_SIZE, total: 0 });
@@ -30,6 +32,7 @@ const AdminReports = () => {
 
     const token = localStorage.getItem("token");
 
+    // Colunas da tabela focadas em dados históricos
     const columns = [
         {
             title: "Cliente",
@@ -77,6 +80,7 @@ const AdminReports = () => {
         },
     ];
 
+    // Carrega o histórico de reservas filtrado pelo período de tempo
     const fetchReports = (page, currentPeriod) => {
         setLoading(true);
 
@@ -108,12 +112,15 @@ const AdminReports = () => {
             .catch(() => setLoading(false));
     };
 
+    // Carrega os dados do relatório ao iniciar
     useEffect(() => { fetchReports(1, period); }, []);
 
+    // Gere a paginação dos dados históricos
     const handleTableChange = (pag) => {
         fetchReports(pag.current, filtersRef.current.period);
     };
 
+    // Altera o intervalo de tempo do relatório (1 mês, 3 meses, etc)
     const handlePeriod = (e) => {
         const val = e.target.value;
         setPeriod(val);

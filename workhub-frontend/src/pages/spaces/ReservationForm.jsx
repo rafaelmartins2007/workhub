@@ -5,6 +5,7 @@ import { message } from "antd";
 import config from "../../config";
 import "./ReservationForm.css";
 
+// Mapeamento de tipos de espaço para nomes mais amigáveis
 const TIPO_LABELS = {
     secretaria_partilhada: "Secretária Partilhada",
     sala_reuniao:          "Sala de Reunião",
@@ -15,8 +16,10 @@ const TIPO_LABELS = {
 const ReservationForm = () => {
     const { id } = useParams();
     const navigate = useNavigate();
+    // Configuração do formulário (react-hook-form)
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
+    // Estados para armazenar dados do espaço, serviços extras e estados de carregamento
     const [space, setSpace] = useState(null);
     const [spaceLoading, setSpaceLoading] = useState(true);
     const [extras, setExtras] = useState([]);
@@ -24,7 +27,7 @@ const ReservationForm = () => {
     const [selectedExtras, setSelectedExtras] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    // Valor da duração para calcular custo em tempo real
+    // Observa o campo de duração para calcular o preço total em tempo real
     const duracao = parseFloat(watch("duracao")) || 0;
 
     // ── Buscar dados do espaço ──
@@ -40,7 +43,7 @@ const ReservationForm = () => {
             .catch(() => setSpaceLoading(false));
     }, [id]);
 
-    // ── Buscar serviços extras disponíveis ──
+    // Procura todos os serviços extras (café, projetor, etc) que estão disponíveis
     useEffect(() => {
         fetch(`${config.API_BASE}/extra-services`, {
             headers: { Accept: "application/json" },
@@ -55,7 +58,7 @@ const ReservationForm = () => {
             .catch(() => setExtrasLoading(false));
     }, []);
 
-    // ── Toggle de serviço extra ──
+    // Adiciona ou remove um serviço extra da seleção do utilizador
     const toggleExtra = (extraId) => {
         setSelectedExtras((prev) =>
             prev.includes(extraId)
@@ -64,7 +67,7 @@ const ReservationForm = () => {
         );
     };
 
-    // ── Cálculo do custo total ──
+    // Cálculos matemáticos para o resumo de custos
     const custoEspaco = space ? space.precoHora * duracao : 0;
     const custoExtras = selectedExtras.reduce((acc, extraId) => {
         const extra = extras.find((e) => e._id === extraId);
@@ -72,7 +75,7 @@ const ReservationForm = () => {
     }, 0);
     const custoTotal = custoEspaco + custoExtras;
 
-    // ── Submissão ──
+    // Função chamada ao clicar em "Confirmar Reserva"
     const onSubmit = (formData) => {
         const token = localStorage.getItem("token");
         if (!token) {
@@ -121,6 +124,7 @@ const ReservationForm = () => {
             });
     };
 
+    // Define a data mínima como "hoje" para o calendário
     const today = new Date().toISOString().split("T")[0];
 
     if (spaceLoading) return <p className="loading">A carregar espaço...</p>;
@@ -130,6 +134,7 @@ const ReservationForm = () => {
         <div className="reservation-page">
             <div className="reservation-card">
 
+                {/* Botão para voltar à página de detalhes */}
                 <button className="back-button" onClick={() => navigate(`/spaces/${id}`)}>
                     ← Voltar ao espaço
                 </button>

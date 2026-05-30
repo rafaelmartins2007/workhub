@@ -7,6 +7,7 @@ import "./MyReservations.css";
 
 const PAGE_SIZE = 10;
 
+// Mapeamento visual para os estados das reservas terminadas
 const STATUS_LABELS = {
     Pendente:   { label: "Pendente",   className: "status pendente"   },
     Confirmada: { label: "Confirmada", className: "status confirmada" },
@@ -14,6 +15,7 @@ const STATUS_LABELS = {
     Concluida:  { label: "Concluída",  className: "status concluida"  },
 };
 
+// Nomes amigáveis para os tipos de espaço
 const TIPO_LABELS = {
     secretaria_partilhada: "Secretária Partilhada",
     sala_reuniao:          "Sala de Reunião",
@@ -23,6 +25,7 @@ const TIPO_LABELS = {
 
 const ReservationHistory = () => {
     const navigate = useNavigate();
+    // Estados para carregar dados, controlar paginação e filtros
     const [loading, setLoading]           = useState(true);
     const [reservations, setReservations] = useState([]);
     const [pagination, setPagination]     = useState({ current: 1, pageSize: PAGE_SIZE, total: 0 });
@@ -30,11 +33,12 @@ const ReservationHistory = () => {
 
     const token = localStorage.getItem("token");
 
-    // Ontem no formato YYYY-MM-DD — dataFim=ontem para mostrar só reservas anteriores a hoje
+    // Calcula a data de ontem para filtrar apenas reservas que já passaram
     const ontem = new Date();
     ontem.setDate(ontem.getDate() - 1);
     const dataFim = ontem.toISOString().split("T")[0];
 
+    // Configuração das colunas da tabela de histórico
     const columns = [
         {
             title: "Espaço",
@@ -85,7 +89,7 @@ const ReservationHistory = () => {
         },
     ];
 
-    // dataFim=ontem → só reservas anteriores a hoje
+    // Procura o histórico na API (reservas com data anterior a hoje)
     const fetchHistory = (page, estado) => {
         setLoading(true);
 
@@ -117,10 +121,13 @@ const ReservationHistory = () => {
             .catch(() => setLoading(false));
     };
 
+    // Carrega o histórico assim que o componente é montado
     useEffect(() => { fetchHistory(1, ""); }, []);
 
+    // Muda de página na tabela de histórico
     const handleTableChange = (pag) => fetchHistory(pag.current, filtroEstado);
 
+    // Filtra o histórico por estado (Cancelada ou Concluída)
     const handleFiltroEstado = (e) => {
         const val = e.target.value;
         setFiltroEstado(val);

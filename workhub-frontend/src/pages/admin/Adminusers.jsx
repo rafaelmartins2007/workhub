@@ -5,12 +5,14 @@ import config from "../../config";
 import "./admin.css";
 
 const AdminUsers = () => {
+    // Estados para a lista de utilizadores, carregamento e termo de pesquisa
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
 
     const token = localStorage.getItem("token");
 
+    // Definição das colunas da tabela de gestão de utilizadores
     const columns = [
         {
             title: "Nome",
@@ -62,7 +64,7 @@ const AdminUsers = () => {
         },
     ];
 
-    // ── Fetch utilizadores ──
+    // Procura todos os utilizadores registados na plataforma
     const fetchUsers = () => {
         setLoading(true);
         fetch(`${config.API_BASE}/users`, {
@@ -79,9 +81,10 @@ const AdminUsers = () => {
             .catch(() => setLoading(false));
     };
 
+    // Carrega os utilizadores ao iniciar a página
     useEffect(() => { fetchUsers(); }, []);
 
-    // ── Suspender / Reativar ──
+    // Função para suspender ou reativar uma conta de utilizador
     const handleToggle = (user) => {
         const acao = user.ativo ? "suspender" : "reativar";
         if (!window.confirm(`Tens a certeza que queres ${acao} a conta de ${user.nome}?`)) return;
@@ -98,7 +101,7 @@ const AdminUsers = () => {
             .catch(() => message.error("Erro ao alterar estado da conta."));
     };
 
-    // ── Filtro local por nome ou email ──
+    // Filtra a lista localmente com base no que o admin digita na pesquisa
     const filtered = users.filter((u) =>
         u.nome.toLowerCase().includes(search.toLowerCase()) ||
         u.email.toLowerCase().includes(search.toLowerCase())

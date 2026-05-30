@@ -6,11 +6,13 @@ import qs from "query-string";
 import config from "../../config";
 import "./admin.css";
 
+// Estados possíveis para uma reserva
 const ESTADOS = ["Pendente", "Confirmada", "Cancelada", "Concluida"];
 
 const PAGE_SIZE = 10;
 
 const AdminReservations = () => {
+    // Estados para a lista de reservas, paginação e filtros
     const [reservations, setReservations] = useState([]);
     const [loading, setLoading] = useState(true);
     const [pagination, setPagination] = useState({ current: 1, pageSize: PAGE_SIZE, total: 0 });
@@ -25,6 +27,7 @@ const AdminReservations = () => {
 
     const token = localStorage.getItem("token");
 
+    // Classes CSS para as cores dos badges de estado
     const badgeClass = {
         Pendente: "badge badge-pendente",
         Confirmada: "badge badge-confirmada",
@@ -32,6 +35,7 @@ const AdminReservations = () => {
         Concluida: "badge badge-concluida",
     };
 
+    // Definição das colunas da tabela Ant Design
     const columns = [
         { title: "Cliente", dataIndex: "user", key: "user", render: (u) => u?.nome || "—" },
         { title: "Espaço", dataIndex: "space", key: "space", render: (s) => s?.tipo?.replace(/_/g, " ") || "—" },
@@ -55,6 +59,7 @@ const AdminReservations = () => {
         },
     ];
 
+    // Função para carregar reservas da API com filtros e paginação
     const fetchReservations = (page, estado) => {
         setLoading(true);
         const query = qs.stringify({
@@ -84,17 +89,21 @@ const AdminReservations = () => {
             .catch(() => setLoading(false));
     };
 
+    // Carrega a lista de todas as reservas ao iniciar
     useEffect(() => {
         fetchReservations(1, "");
     }, []);
 
+    // Muda de página na tabela
     const handleTableChange = (pag) => fetchReservations(pag.current, filtroEstado);
 
+    // Altera o filtro de estado (Pendente, Confirmada, etc)
     const handleFiltroEstado = (e) => {
         setFiltroEstado(e.target.value);
         fetchReservations(1, e.target.value);
     };
 
+    // Abre o painel lateral e preenche o formulário com os dados da reserva selecionada
     const openEdit = (res) => {
         setEditingRes(res);
         reset({
@@ -105,11 +114,13 @@ const AdminReservations = () => {
         setPanelOpen(true);
     };
 
+    // Fecha o painel lateral
     const closePanel = () => {
         setPanelOpen(false);
         setEditingRes(null);
     };
 
+    // Envia as alterações da reserva para o servidor
     const onSubmit = (formData) => {
         setSaving(true);
         fetch(`${config.API_BASE}/reservations/${editingRes._id}`, {
@@ -147,6 +158,7 @@ const AdminReservations = () => {
                 </div>
             </div>
 
+            {/* Filtros de topo */}
             <div className="admin-filters">
                 <select value={filtroEstado} onChange={handleFiltroEstado}>
                     <option value="">Todos os estados</option>
@@ -156,6 +168,7 @@ const AdminReservations = () => {
                 </select>
             </div>
 
+            {/* Tabela de dados */}
             <Table
                 columns={columns}
                 rowKey={r => r._id}
